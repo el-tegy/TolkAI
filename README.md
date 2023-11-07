@@ -32,4 +32,4 @@ Thank you for your support and interest.
 
 Best regards,
 
-Elisée TEGUE, Technical Lead @chatBI
+Elisée TEGUE, Tech Lead @chatBI

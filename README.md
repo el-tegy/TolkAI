@@ -1,4 +1,4 @@
-# Welcome to chatBI!
+# Welcome to TolkAI!
 Your next BI projects are AI assisted.
 
 ## Coming Soon!
@@ -32,4 +32,4 @@ Thank you for your support and interest.
 
 Best regards,
 
-Elisée TEGUE, Tech Lead @TolkAI
+Elisée TEGUE

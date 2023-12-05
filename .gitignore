@@ -1,0 +1,6 @@
+# Credentials
+credentials.json
+
+# Virtual environment
+venv/
+env/

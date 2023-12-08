@@ -16,12 +16,12 @@ load_dotenv()
 
 def get_power_bi_response(user_query, temperature=0.2):
     # Chat model for generating text
-    chat_model = ChatModel.from_pretrained("chat-bison@002")
+    chat_model = ChatModel.from_pretrained("chat-bison")
 
     # Parameters for chat model
     parameters = {
         "temperature": temperature,
-        "max_output_tokens": 500,
+        "max_output_tokens": 1024,
         "top_p": 0.95,
         "top_k": 40,
     }
@@ -78,7 +78,6 @@ def combine_text_and_image(response_text, items_links):
 
     for item in items_links:
         output = query_from_url(item)
-        print(item)
         resume = output[0]['generated_text']
         combined_texts.append(resume)
 

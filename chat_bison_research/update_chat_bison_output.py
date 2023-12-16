@@ -8,13 +8,25 @@ def get_chat_bison_output(query):
     return doc_text
 
 def extract_image_labels(text):
-    return re.findall(r'\[Image of the (.*?)\]', text)
+    image_labels = re.findall(r'\[Image of the (.*?)\]', text)
+    original_labels = ['Image of the ' + item for item in image_labels]
+    return original_labels
+
+def enhance_image_labels(image_labels):
+    enhanced_labels = []
+    for label in image_labels:
+        if "Power BI Desktop" not in label:
+            label = label + "in Power BI Desktop"
+            enhanced_labels.append(label)
+        else:
+            enhanced_labels.append(label)
+    return enhanced_labels
 
 def insert_image_links(doc_text, image_labels):
-    image_links = [image_retrieval_pipeline(label) for label in image_labels]
-    original_labels = ['Image of the ' + item for item in image_labels]
+    enhanced_labels = enhance_image_labels(image_labels)
+    image_links = [image_retrieval_pipeline(label) for label in enhanced_labels]
     for i, link in enumerate(image_links):
-        doc_text = doc_text.replace(f"[{original_labels[i]}]", f"{link}", 1)
+        doc_text = doc_text.replace(f"[{image_labels[i]}]", f"{link}", 1)
     return doc_text
 
 def modify_elements(item_list):
@@ -39,8 +51,6 @@ def mapping(doc_text):
     response = chat_with_gemini(query)
     return response
 
-user_query = "Provide me with a step by step guide to create a heat map chart in Power BI Desktop (include images in each step of the guide so that I can easily follow up)"
-
 def update_chat_bison_output_with_images(query):
     doc_text = get_chat_bison_output(query)
     doc_text = mapping(doc_text)
@@ -49,5 +59,6 @@ def update_chat_bison_output_with_images(query):
 
     return updated_doc_text
 
+user_query = "Provide me with a step by step guide to create a heat map chart in Power BI Desktop (include images in each step of the guide so that I can easily follow up)"
 response = update_chat_bison_output_with_images(user_query)
 print(response)

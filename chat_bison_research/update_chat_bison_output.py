@@ -14,7 +14,7 @@ def insert_image_links(doc_text, image_labels):
     image_links = [image_retrieval_pipeline(label) for label in image_labels]
     original_labels = ['Image of the ' + item for item in image_labels]
     for i, link in enumerate(image_links):
-        doc_text = doc_text.replace(f"[{original_labels[i]}]", f"{link}", 1)
+        doc_text = doc_text.replace(f"[{original_labels[i]}]", f'<img src={link} width="400">', 1)
     return doc_text
 
 def modify_elements(item_list):
@@ -49,5 +49,3 @@ def update_chat_bison_output_with_images(query):
 
     return updated_doc_text
 
-response = update_chat_bison_output_with_images(user_query)
-print(response)

@@ -26,7 +26,8 @@ def insert_image_links(doc_text, image_labels):
     enhanced_labels = enhance_image_labels(image_labels)
     image_links = [image_retrieval_pipeline(label) for label in enhanced_labels]
     for i, link in enumerate(image_links):
-        doc_text = doc_text.replace(f"[{image_labels[i]}]", f"{link}", 1)
+        doc_text = doc_text.replace(f"[{original_labels[i]}]", f'<img src={link} width="400">', 1)
+
     return doc_text
 
 def modify_elements(item_list):
@@ -59,6 +60,3 @@ def update_chat_bison_output_with_images(query):
 
     return updated_doc_text
 
-user_query = "Provide me with a step by step guide to create a heat map chart in Power BI Desktop (include images in each step of the guide so that I can easily follow up)"
-response = update_chat_bison_output_with_images(user_query)
-print(response)

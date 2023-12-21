@@ -33,3 +33,17 @@ Thank you for your support and interest.
 Best regards,
 
 Elisée TEGUE
+
+## Installation FRONTEND STREAMLIT
+
+1. Clone the repository.
+   ```bash
+   git clone https://github.com/el-tegy/TolkAI.git
+   
+2. Install streamlit
+    ```bash
+   pip install streamlit
+   
+3. Run front 
+    ```bash
+   streamlit run Frontend/front_streamlit.py

@@ -2,6 +2,7 @@ import re
 from image_retrieval import image_retrieval_pipeline
 from chat_bison import chat_bison
 from vertexai.preview.generative_models import GenerativeModel
+import concurrent.futures
 
 def get_chat_bison_output(query):
     doc_text = chat_bison(query)
@@ -22,23 +23,25 @@ def enhance_image_labels(image_labels):
             enhanced_labels.append(label)
     return enhanced_labels
 
-def insert_image_links(doc_text, image_labels):
+def insert_image_links_parallel(doc_text, image_labels):
     enhanced_labels = enhance_image_labels(image_labels)
-    image_links = [image_retrieval_pipeline(label) for label in enhanced_labels]
+    image_links = []
+
+    # Define a function to retrieve image links in parallel
+    def retrieve_image_link(label):
+        return image_retrieval_pipeline(label)
+
+    # Use ThreadPoolExecutor for parallel processing
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        # Retrieve image links concurrently
+        image_links = list(executor.map(retrieve_image_link, enhanced_labels))
+
+    # Replace image labels with image links in doc_text
     for i, link in enumerate(image_links):
-        doc_text = doc_text.replace(f"[{original_labels[i]}]", f'<img src={link} width="400">', 1)
+        doc_text = doc_text.replace(f"[{image_labels[i]}]", f'<img src={link} width="400">', 1)
 
     return doc_text
 
-def modify_elements(item_list):
-    modified_list = []
-    for item in item_list:
-        # Replace double quotes with single quotes
-        modified_item = item.replace('"', "'")
-        # Enclose the entire string within double quotes
-        #modified_item = f'"{modified_item}"'
-        modified_list.append(modified_item)
-    return modified_list
 
 def chat_with_gemini(message):
     #vertexai.init(project="PROJECT_ID", location="us-central1")
@@ -52,11 +55,13 @@ def mapping(doc_text):
     response = chat_with_gemini(query)
     return response
 
-def update_chat_bison_output_with_images(query):
+def update_chat_bison_output_with_images_parallel(query):
     doc_text = get_chat_bison_output(query)
     doc_text = mapping(doc_text)
     image_labels = extract_image_labels(doc_text)
-    updated_doc_text = insert_image_links(doc_text, image_labels)
+    updated_doc_text = insert_image_links_parallel(doc_text, image_labels)
 
     return updated_doc_text
 
+query= "Provide me with a step by step guide to create a heat map chart in Power BI Desktop (include images in each step of the guide so that I can easily follow up)"
+print(update_chat_bison_output_with_images_parallel(query))

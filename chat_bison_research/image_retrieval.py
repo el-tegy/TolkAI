@@ -5,7 +5,6 @@ and a cosine similarity to get the relevant image which meet the most with your 
 
 """
 import requests
-import threading
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from vertexai.preview.generative_models import GenerativeModel, Part
@@ -64,11 +63,6 @@ def generate(image_link):
     return result  
 
 
-def process_individual_image(item, combined_texts):
-    if item:
-        output = generate(item)
-        combined_texts.append(output)
-        
 def image_captioning(list_of_items):
     """
     Gathering the description of images 
@@ -80,33 +74,18 @@ def image_captioning(list_of_items):
         list: a list which contains the description of each image
     """
     combined_texts=[]
-    threads = []
-    
-    # Extraire les liens des items
-    items_links=[item['link'] for item in list_of_items]
-    
-    # Créer et démarrer un thread pour chaque lien d'image
-    for link in items_links:
-        thread = threading.Thread(target=process_individual_image, args=(link, combined_texts))
-        threads.append(thread)
-        thread.start()
-
-    # Attendre que tous les threads se terminent
-    for thread in threads:
-        thread.join()
-
-    return combined_texts
-    
-    # for item in items_links:
-    #     try:
-    #         output = generate(item)
-    #         resume = output
-    #         #print(f"{item}")
-    #         combined_texts.append(resume)
-    #         #combined_texts.insert(0, user_query)
-    #         return combined_texts
-    #     except Exception as e:
-    #         return e
+    items=list_of_items
+    items_links=[item['link'] for item in items]
+    for item in items_links:
+        try:
+            output = generate(item)
+            resume = output
+            #print(f"{item}")
+            combined_texts.append(resume)
+            #combined_texts.insert(0, user_query)
+            return combined_texts
+        except Exception as e:
+            return e
 
 def image_selection(list_of_combined_texts, items, query):
     """

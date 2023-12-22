@@ -2,8 +2,8 @@ import vertexai
 from vertexai.language_models import ChatModel, InputOutputTextPair
 from vertexai.preview.language_models import TextGenerationModel
 
-#vertexai.init(project="ping38", location="us-central1")
-def text_bison(query):
+vertexai.init(project="ping38", location="us-central1")
+def chat_text_bison(query):
     model = TextGenerationModel.from_pretrained("text-bison@002")
     parameters = {
         "candidate_count": 1,
@@ -29,6 +29,3 @@ def text_bison(query):
     )
 
     return response.text
-
-user_query = "what is powerbi?"
-print(text_bison(user_query))

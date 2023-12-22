@@ -1,7 +1,7 @@
 import vertexai
 from vertexai.language_models import ChatModel, InputOutputTextPair
 
-#vertexai.init(project="ping38", location="us-central1")
+vertexai.init(project="ping38", location="us-central1")
 def chat_bison(query):
     chat_model = ChatModel.from_pretrained("chat-bison")
     parameters = {

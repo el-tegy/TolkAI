@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: vertexai
+Version: 0.0.1
+Summary: Please run pip install google-cloud-aiplatform to use the Vertex SDK.
+Author-email: Google LLC <googleapis-packages@google.com>
+License: Apache 2.0
+Project-URL: repository, https://github.com/googleapis/python-aiplatform.git
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+vertexai
+========
+
+To use the Vertex AI SDK, please install the `google-cloud-aiplatform` PyPi package by running `pip install google-cloud-aiplatform`.

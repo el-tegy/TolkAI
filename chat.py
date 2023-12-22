@@ -31,13 +31,10 @@ def get_power_bi_response(user_query, temperature=0.2):
         context="You are an exper in Power BI analytic tool. \n Add images to your response. Use the Power BI documentation to add the right image"
     )
 
-    # Send a message related to the user's query
     response_text = chat.send_message(user_query, **parameters).text
 
-    # Use the user query to search for relevant images
     items_links = search_images_on_google(user_query)
 
-    # Combine the generated text with the most relevant image
     combine_text_and_image(response_text, items_links)
 
     # return combined_response

@@ -19,3 +19,4 @@ def chat_bison(query):
     )
     response = chat.send_message(query, **parameters)
     return response.text
+

@@ -122,3 +122,5 @@ def image_retrieval_pipeline(image_label):
     combined_texts = image_captioning(items)
     image_link = image_selection(combined_texts, items, image_label)
     return image_link
+
+#print(image_retrieval_pipeline("Image of a bar chart"))

@@ -72,4 +72,4 @@ if prompt:
     response = chat_tolkai(prompt)
     st.session_state['messages'].append({"role": "assistant", "content": response})
     with st.chat_message("assistant"):
-        st.markdown(response)
+        st.markdown(response,unsafe_allow_html=True)

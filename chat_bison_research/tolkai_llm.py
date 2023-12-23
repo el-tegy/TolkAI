@@ -14,3 +14,6 @@ def chat_tolkai(query):
     else:
         return "Sorry but I don't understand your question. Can you please rephrase it?"
     
+#user_query = "Give me a step by step guide to create a bar chart in Power BI"
+#print(chat_tolkai(user_query))
+    

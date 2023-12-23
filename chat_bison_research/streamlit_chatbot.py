@@ -12,7 +12,7 @@ from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain.chains import SimpleSequentialChain
 from vertexai.preview.language_models import TextGenerationModel
-from update_chat_bison_output import update_chat_bison_output_with_images
+from chat_bison_research.chat_pagev import update_chat_bison_output_with_images
 from vertexai.language_models import ChatModel, InputOutputTextPair
 
 

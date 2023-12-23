@@ -40,7 +40,7 @@ def insert_image_links_parallel(doc_text, image_labels):
 
     # Replace image labels with image links in doc_text
     for i, link in enumerate(image_links):
-        doc_text = doc_text.replace(f"[{image_labels[i]}]", f'<img src={link} width="400">', 1)
+        doc_text = doc_text.replace(f"[{image_labels[i]}]", f'<br><img src={link} width="400">', 1)
 
     return doc_text
 
@@ -64,3 +64,6 @@ def chat_pagev(query):
     updated_doc_text = insert_image_links_parallel(doc_text, image_labels)
 
     return updated_doc_text
+
+#user_query = "How to create a bar chart in Power BI? provide me steps and images"
+#print(chat_pagev(user_query))

@@ -9,7 +9,7 @@ from typing import Any, List, Mapping, Optional
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain_core.language_models.llms import LLM
 from vertexai.preview.generative_models import GenerativeModel
-from update_chat_bison_output import update_chat_bison_output_with_images
+from chat_bison_research.chat_pagev import update_chat_bison_output_with_images
 
 
 class GeminiProLLM(LLM):

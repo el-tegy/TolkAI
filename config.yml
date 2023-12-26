@@ -1,5 +1,5 @@
 chatbot:
-  name: "INSERT_BOT_NAME_HERE"
+  name: "TolkAI"
 Key_File: "key.env"
 OpenAI:
   chat_temp: 0.0

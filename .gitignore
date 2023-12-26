@@ -1,0 +1,11 @@
+# Ignore credentials
+credentials.json
+Credentials.json
+
+
+# ignore virtual environments
+ven
+env
+myenv
+key.env
+.env

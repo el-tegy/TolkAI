@@ -25,13 +25,12 @@ def setup_agent(chatbot_name):
     )
     # Instantiate a datetime object for datetime functionality
     tools = [
-        Tool(
-            name="Search",
-            func=search.run,
-            description="The Search tool uses Google Search API to conduct Google searches. It retrieves raw search results without any inherent interpretation. \
-            Utilize this tool to fetch links of images you need to enhance your answer, but always analyze and deduce relevant images from the results \
-            to avoid the use of generic placeholders such as '[Image of the 'get data' button in Power BI]'."
-        ),
+        #Tool(
+        #    name="Search",
+        #    func=search.run,
+        #    description="The Search tool uses Google Search API to conduct Google searches. It retrieves raw search results without any inherent interpretation. \
+        #    Utilize this tool only and only when you need to fetch new information on the Internet that you don't know already."
+        #),
         Tool(
             name="Image link from image label",
             func=image_retrieval_pipeline,
@@ -88,7 +87,7 @@ if __name__:
     # Get the chatbot name from the config.yml file
     chatbot_name = "TolkAI"
     # Get the user input from the user
-    user_input = "provide me with a step by step guide on how to create a time series in Tableau desktop. In your answer, \
+    user_input = "provide me with a step by step guide on how to create a time series in Power BI. In your answer, \
     include relevant images showing me where to click in Power BI so that I can easily follow up"
     #user_input = "Who are you?"
     #user_input = "Give me the link of an image of the Eiffel Tower. The link, not the image itself."

@@ -1,9 +1,10 @@
 # Import necessary modules and classes
-import os
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 from langchain.utilities import SerpAPIWrapper
 from langchain_community.utilities.google_search import GoogleSearchAPIWrapper
 from langchain.chains import LLMChain
+import sys
+sys.path.append('/Users/mnguemnin/Documents/TolkAI-1/src')
 from template.template import CustomPromptTemplate, read_template
 from langchain_google_genai import ChatGoogleGenerativeAI
 from parser.parser import CustomOutputParser
@@ -12,8 +13,8 @@ from datetime import datetime
 from pathlib import Path
 from utils.config import load_config
 from image_retrieval import image_retrieval_pipeline
+from codey import code_generation
 
-load_dotenv()
 # Load configuration from config.yml
 config = load_config()
 
@@ -21,8 +22,8 @@ def setup_agent(chatbot_name):
     # Instantiate a SerpAPIWrapper object for search functionality
     #search = SerpAPIWrapper(serpapi_api_key="65f72e3a8a483e9384510c99144a93f4f5e98d39da2775d519c7ff09101da23d")
     search = GoogleSearchAPIWrapper(
-        google_api_key = os.getenv("Google_API_Key"),
-        google_cse_id = os.getenv("Google_CSE_ID"),
+        google_api_key = "AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
+        google_cse_id = "b3cc7e87732c140e9",
         k=10
     )
     # Instantiate a datetime object for datetime functionality
@@ -41,7 +42,14 @@ def setup_agent(chatbot_name):
             Utilize this tool to fetch links of images you need to enhance your answer, by passing it images labels \
             such as 'Image of the 'get data' button in Power BI'."
         ),
+        Tool(
+            name="code from query",
+            func=code_generation,
+            description="This tool returns a code from a query that necessitates code generation. \
+                    Utilize this tool to answer questions that ask for programs, scrips, code or algorithms."
+        ),
     ]
+
 
     # Set up the prompt template using the base.txt file and the tools list
     prompt = CustomPromptTemplate(
@@ -54,7 +62,7 @@ def setup_agent(chatbot_name):
     output_parser = CustomOutputParser()
 
     # Instantiate a ChatOpenAI object for language model interaction
-    llm = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key = os.getenv("Google_API_Key"))
+    llm = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key = "AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E")
 
     # Set up the LLMChain using the ChatOpenAI object and prompt template
     llm_chain = LLMChain(llm=llm, prompt=prompt)
@@ -90,8 +98,14 @@ if __name__:
     # Get the chatbot name from the config.yml file
     chatbot_name = "TolkAI"
     # Get the user input from the user
-    user_input = "provide me with a step by step guide on how to create a time series in Power BI desktop. In your answer, \
-    include relevant images showing me where to click in Power BI so that I can easily follow up"
+    #user_input = "provide me with a step by step guide on how to create a time series in Power BI desktop. In your answer, \
+    #include relevant images showing me where to click in Power BI so that I can easily follow up"
+    #user_input = "Write a Python function to identify all prime numbers"
+    #user_input = "Write a java program to identify all prime numbers"
+    #user_input = "script to lauch an app"
+    #user_input = "An algorithm of complexity O(n)"
+    #user_input = "write a small android studio app"
+    user_input = "write a small android studio app"
     #user_input = "Who are you?"
     #user_input = "Give me the link of an image of the Eiffel Tower. The link, not the image itself."
     #user_input = "why aren't you able to perform Google searches and retrieve information from external websites?"

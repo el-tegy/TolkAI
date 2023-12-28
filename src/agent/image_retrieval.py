@@ -4,8 +4,6 @@ This module use google search to find images of a query, gemini-pro-vision to de
 and a cosine similarity to get the relevant image which meet the most with your query
 
 """
-import os
-from dotenv import load_dotenv
 import requests
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -15,16 +13,14 @@ url = "https://www.googleapis.com/customsearch/v1"
 total_images = 30 # Total number of images to download
 images_per_request = 10  # Maximum number of images per request
 
-load_dotenv()
-
 def image_search(query):
     all_images = []  # List to hold all the images
 
     for start_index in range(1, total_images + 1, images_per_request):
         params = {
             "q": query,
-            "cx": os.getenv("Google_CSE_ID"),
-            "key": os.getenv("Google_API_Key"),
+            "cx": "b3cc7e87732c140e9",
+            "key": "AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
             "searchType": "image",
             "num": images_per_request,
             "start": start_index,
@@ -32,7 +28,7 @@ def image_search(query):
         }
         response = requests.get(url, params=params)
         data = response.json()
-        
+
         if 'items' in data:
              all_images.extend(data['items'])
         else:
@@ -42,7 +38,7 @@ def image_search(query):
 
 def generate(image_link):
     """
-    Description of the images 
+    Description of the images
 
     Args:
         image_link (str): link of the image
@@ -64,12 +60,12 @@ def generate(image_link):
     result=""
     for response in responses:
         result+=response.candidates[0].content.parts[0].text
-    return result  
+    return result
 
 
 def image_captioning(list_of_items):
     """
-    Gathering the description of images 
+    Gathering the description of images
 
     Args:
         list_of_items (list): list of images found by google search
@@ -126,3 +122,5 @@ def image_retrieval_pipeline(image_label):
     combined_texts = image_captioning(items)
     image_link = image_selection(combined_texts, items, image_label)
     return image_link
+
+#print(image_retrieval_pipeline("Image of the Power BI Desktop interface"))

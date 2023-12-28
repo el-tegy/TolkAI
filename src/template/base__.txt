@@ -60,7 +60,7 @@ After having thought, your answer may look like this :
 [Image of the Power BI Desktop window with the "Publish" button highlighted]
 """
 
-But, you should never return this type of answer but always enhance your answer by replacing images labels with theirs links using the image link from image label tool
+But, you should always enhance your answer by replacing images labels with theirs links using the image link from image label tool
 by simply passing each image label to the 'image_retrieval_pipeline(image_label)' function (e.g: image_retrieval_pipeline("Image of the Power BI Desktop window with the "Get Data" button"))
 then, replace each image label with the link returned by the function. At the end, your final answer should look like this:
 """Sure, here is a step-by-step guide on how to make a heatmap in Power BI desktop

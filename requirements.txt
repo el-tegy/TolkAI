@@ -1,5 +1,9 @@
-langchain==0.0.273
-openai==0.27.9
+langchain
+langchain_community==0.0.4
+google-cloud-aiplatform
+langchain-google-genai
 python-dotenv==1.0.0
+google-api-python-client==2.100.0
 google_search_results==2.4.2
 pytest==7.3.1
+pyarrow==0.15.1

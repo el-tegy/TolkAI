@@ -19,7 +19,6 @@ config = load_config()
 
 def setup_agent(chatbot_name):
     # Instantiate a SerpAPIWrapper object for search functionality
-    #search = SerpAPIWrapper(serpapi_api_key="65f72e3a8a483e9384510c99144a93f4f5e98d39da2775d519c7ff09101da23d")
     search = GoogleSearchAPIWrapper(
         google_api_key = os.getenv("Google_API_Key"),
         google_cse_id = os.getenv("Google_CSE_ID"),

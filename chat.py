@@ -4,12 +4,14 @@ import requests
 import threading
 import warnings
 import time
+import numpy as np
 from IPython.display import Image, display
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from concurrent.futures import ThreadPoolExecutor
 from vertexai.preview.generative_models import GenerativeModel, Part  # Assurez-vous que cette importation est nécessaire et correcte
-
+# call algorithms
+from algorithms import jaccard_similarity, image_selection_jaccard, image_selection_levenshtein, image_selection_bert, image_selection_lsa, image_selection_manhattan, image_selection_cosine
 # Ingore all TensorFlow warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -141,21 +143,37 @@ def image_captioning(list_of_items):
 
     return combined_texts
 
-def image_selection(list_of_combined_texts, items, query):
-    """
-    Sélectionne l'image la plus pertinente en fonction des descriptions et de la requête initiale.
+# def image_selection(list_of_combined_texts, items, query):
+#     """
+#     Sélectionne l'image la plus pertinente en fonction des descriptions et de la requête initiale.
 
-    :param list_of_combined_texts: Liste des descriptions des images.
-    :param items: Liste des items (images) correspondants.
-    :param query: Requête de recherche initiale.
-    :return: URL de l'image la plus pertinente.
-    """
-    combined_texts = [query] + list_of_combined_texts
-    vectorizer = TfidfVectorizer()
-    tfidf_matrix = vectorizer.fit_transform(combined_texts)
-    cosine_similarities = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:])
-    most_similar_idx = cosine_similarities.argsort()[0][-1]
-    return items[most_similar_idx]['contentUrl']
+#     :param list_of_combined_texts: Liste des descriptions des images.
+#     :param items: Liste des items (images) correspondants.
+#     :param query: Requête de recherche initiale.
+#     :return: URL de l'image la plus pertinente.
+#     """
+#     combined_texts = [query] + list_of_combined_texts
+#     vectorizer = TfidfVectorizer()
+#     tfidf_matrix = vectorizer.fit_transform(combined_texts)
+#     cosine_similarities = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:])
+#     most_similar_idx = cosine_similarities.argsort()[0][-1]
+#     return items[most_similar_idx]['contentUrl']
+
+def image_selection(list_of_combined_texts, items, query, algorithm='lsa'):    
+    if algorithm == 'jaccard':
+        return image_selection_jaccard(list_of_combined_texts, items, query)
+    elif algorithm == 'levenshtein':
+        selected_image = image_selection_levenshtein(list_of_combined_texts, items, query)
+    elif algorithm == 'bert':
+        selected_image = image_selection_bert(list_of_combined_texts, items, query)
+    elif algorithm == 'cosine':
+        selected_image = image_selection_cosine(list_of_combined_texts, items, query)
+    elif algorithm == 'lsa':
+        selected_image = image_selection_lsa(list_of_combined_texts, items, query)
+    elif algorithm == 'manhattan':
+        selected_image = image_selection_manhattan(list_of_combined_texts, items, query)
+    # autres conditions pour différents algorithmes...
+    return selected_image
 
 def image_retrieval_pipeline(image_label):
     """
@@ -183,4 +201,4 @@ end_time = time.time()
 
 # Calculer et afficher la durée d'exécution
 duration = end_time - start_time
-print(f"Temps d'exécution total : {duration} secondes")
+print(f"Temps d'exécution total : {duration} secondes soit {round(duration/60, 2)} minutes")

@@ -14,5 +14,8 @@ key.env
 __pycache__/
 *.py[cod]
 
+# ignore cpython files
+*.pyc
+
 # ignore idea files
 .idea/

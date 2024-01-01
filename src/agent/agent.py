@@ -12,6 +12,7 @@ from datetime import datetime
 from pathlib import Path
 from utils.config import load_config
 from image_retrieval import image_retrieval_pipeline
+from codey import code_generation
 
 load_dotenv()
 # Load configuration from config.yml
@@ -38,6 +39,12 @@ def setup_agent(chatbot_name):
             description="This tool returns a image link given an image label passed as a parameter. \
                 Utilize this tool to fetch links of images you need to enhance your answer, by passing it images labels \
                 such as 'Image of the 'get data' button in Power BI'."
+        ),
+        Tool(
+            name="code from query",
+            func=code_generation,
+            description="This tool returns a code from a query that necessitates code generation. \
+                Utilize this tool to answer questions that ask for programs, scrips, code or algorithms."
         ),
     ]
 

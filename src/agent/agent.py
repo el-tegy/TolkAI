@@ -26,25 +26,25 @@ def setup_agent(chatbot_name):
     )
     # Instantiate a datetime object for datetime functionality
     tools = [
-        Tool(
-            name="Search",
-            func=search.run,
-            description="The Search tool uses Google Search API to conduct Google searches. It retrieves raw search results without any inherent interpretation. \
-            Utilize this tool to fetch links of images you need to enhance your answer, but always analyze and deduce relevant images from the results \
-            to avoid the use of generic placeholders such as '[Image of the 'get data' button in Power BI]'."
-        ),
+        # Tool(
+        #    name="Search",
+        #    func=search.run,
+        #    description="The Search tool uses Google Search API to conduct Google searches. It retrieves raw search results without any inherent interpretation. \
+        #    Utilize this tool only and only when you need to fetch new information on the Internet that you don't know already."
+        # ),
         Tool(
             name="Image link from image label",
             func=image_retrieval_pipeline,
             description="This tool returns a image link given an image label passed as a parameter. \
-            Utilize this tool to fetch links of images you need to enhance your answer, by passing it images labels \
-            such as 'Image of the 'get data' button in Power BI'."
+                Utilize this tool to fetch links of images you need to enhance your answer, by passing it images labels \
+                such as 'Image of the 'get data' button in Power BI'."
         ),
     ]
 
     # Set up the prompt template using the base.txt file and the tools list
     prompt = CustomPromptTemplate(
-        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base.txt")).replace("{chatbot_name}", chatbot_name),
+        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base.txt")).replace(
+            "{chatbot_name}", chatbot_name),
         tools=tools,
         input_variables=["input", "intermediate_steps"]
     )
@@ -53,7 +53,7 @@ def setup_agent(chatbot_name):
     output_parser = CustomOutputParser()
 
     # Instantiate a ChatOpenAI object for language model interaction
-    llm = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key = os.getenv("Google_API_Key"))
+    llm = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E")
 
     # Set up the LLMChain using the ChatOpenAI object and prompt template
     llm_chain = LLMChain(llm=llm, prompt=prompt)
@@ -70,7 +70,8 @@ def setup_agent(chatbot_name):
 
     # Create an AgentExecutor from the agent and tools with verbose output
     agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True)
-    return agent_executor   
+    return agent_executor
+
 
 def chat_with_agent(user_input: str, chatbot_name: str):
     # Set up the agent using the setup_agent() function
@@ -83,18 +84,19 @@ def chat_with_agent(user_input: str, chatbot_name: str):
     else:
         return response
 
-if __name__: 
+
+if __name__:
     # Load environment variables from .env file
     load_dotenv(config["Key_File"])
     # Get the chatbot name from the config.yml file
     chatbot_name = "TolkAI"
     # Get the user input from the user
-    user_input = "provide me with a step by step guide on how to create a time series in Power BI desktop. In your answer, \
-    include relevant images showing me where to click in Power BI so that I can easily follow up"
-    #user_input = "Who are you?"
-    #user_input = "Give me the link of an image of the Eiffel Tower. The link, not the image itself."
-    #user_input = "why aren't you able to perform Google searches and retrieve information from external websites?"
-    #user_input = "Where and when was the COP28 held?"
+    user_input = "provide me with a step by step guide on how to create a time series in Power BI. In your answer, \
+        include relevant images showing me where to click in Power BI so that I can easily follow up"
+    # user_input = "Who are you?"
+    # user_input = "Give me the link of an image of the Eiffel Tower. The link, not the image itself."
+    # user_input = "why aren't you able to perform Google searches and retrieve information from external websites?"
+    # user_input = "Where and when was the COP28 held?"
     # Get the response from the agent
     response = chat_with_agent(user_input, chatbot_name)
     # Print the response

@@ -9,3 +9,10 @@ env
 myenv
 key.env
 .env
+
+# ignore python cache
+__pycache__/
+*.py[cod]
+
+# ignore idea files
+.idea/

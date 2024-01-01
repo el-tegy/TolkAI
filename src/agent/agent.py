@@ -98,12 +98,11 @@ if __name__:
     # Get the chatbot name from the config.yml file
     chatbot_name = "TolkAI"
     # Get the user input from the user
+    #user_input = "Who are you?"
     user_input = "provide me with a step by step guide on how to create a time series in Power BI. In your answer, \
-        include relevant images showing me where to click in Power BI so that I can easily follow up"
-    # user_input = "Who are you?"
-    # user_input = "Give me the link of an image of the Eiffel Tower. The link, not the image itself."
-    # user_input = "why aren't you able to perform Google searches and retrieve information from external websites?"
-    # user_input = "Where and when was the COP28 held?"
+    include relevant images showing me where to click in Power BI so that I can easily follow up"
+    #user_input = "What is the difference between a bar chart and a line chart?"
+    #user_input = "Give me the python code to sum up all the elements in a list."
     # Get the response from the agent
     response = chat_with_agent(user_input, chatbot_name)
     # Print the response

@@ -141,5 +141,3 @@ def image_retrieval_pipeline(query):
     elif len(df_items) == 0:
         print("DataFrame has zero rows.")
         return None
-
-print(image_retrieval_pipeline("get data in Power BI desktop"))

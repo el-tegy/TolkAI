@@ -16,12 +16,12 @@ from embedding_prediction_client import EmbeddingPredictionClient
 
 load_dotenv()
 #from IPython.display import Image, display
-PROJECT_ID = 'ping38'
+project_id = 'ping38'
 url = "https://www.googleapis.com/customsearch/v1"
 total_images = 15 # Total number of images to download
 images_per_request = 5  # Maximum number of images per request
 
-client = EmbeddingPredictionClient(project=PROJECT_ID)
+client = EmbeddingPredictionClient(project=project_id)
 
 
 def image_search(query):

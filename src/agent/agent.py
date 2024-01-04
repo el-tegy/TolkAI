@@ -92,7 +92,7 @@ def chat_with_agent(user_input: str, chatbot_name: str):
         return response
 
 
-if __name__:
+"""if __name__:
     # Load environment variables from .env file
     load_dotenv(config["Key_File"])
     # Get the chatbot name from the config.yml file
@@ -107,4 +107,4 @@ if __name__:
     # Get the response from the agent
     response = chat_with_agent(user_input, chatbot_name)
     # Print the response
-    print(response)
+    print(response)"""

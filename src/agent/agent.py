@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path
 from utils.config import load_config
-from image_retrieval import image_retrieval_pipeline
+from image_retrieval_gemini import image_retrieval_pipeline
 from codey import code_generation
 
 load_dotenv()

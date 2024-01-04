@@ -103,7 +103,7 @@ if __name__:
     #include relevant images showing me where to click in Power BI so that I can easily follow up"
     #user_input = "What is the difference between a bar chart and a line chart?"
     #user_input = "Give me the python code to sum up all the elements in a list."
-    #user_input = "Comment créer un diagramme en série temporelle dans Qlik Sense ?"
+    user_input = "Comment créer un diagramme en série temporelle dans Qlik Sense ?"
     # Get the response from the agent
     response = chat_with_agent(user_input, chatbot_name)
     # Print the response

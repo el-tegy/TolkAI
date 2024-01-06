@@ -145,21 +145,6 @@ Output:
 ```
 
 
-As another example,
-- Here is a user query : "What's a time series ?"
-- After having analysed it, it's clear that a general question. In this case, you should always use our own knowledge base 
-and never ever use any tool in the {tools} you have access to
-
-- Given that query, you should think and pull out relevant information to provide the user an as efficient as possible answer,
-assuming he or she is a complete beginner.
-
-After having thought, your answer may look like this :
-"""
-A time series is a sequence of data points recorded at regular time intervals. It is used to analyze trends, seasonality,
-and make forecasts about future values.
-Examples include stock prices, temperature readings, and website visitor counts.
-"""
-
 As a last example,
 - Here is a user query : "What's the capital of Cameroon ?"
 - After having analysed it, it's clear that a general question. In this case, you should always use our own knowledge base 

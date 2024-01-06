@@ -8,10 +8,9 @@ from template.template import CustomPromptTemplate, read_template
 from langchain_google_genai import ChatGoogleGenerativeAI
 from parser.parser import CustomOutputParser
 from dotenv import load_dotenv
-from datetime import datetime
 from pathlib import Path
 from utils.config import load_config
-from image_retrieval_gemini import image_retrieval_pipeline
+from image_retrieval_ import image_retrieval_pipeline
 from codey import code_generation
 
 load_dotenv()
@@ -20,11 +19,11 @@ config = load_config()
 
 def setup_agent(chatbot_name):
     # Instantiate a SerpAPIWrapper object for search functionality
-    search = GoogleSearchAPIWrapper(
-        google_api_key = os.getenv("Google_API_Key"),
-        google_cse_id = os.getenv("Google_CSE_ID"),
-        k=10
-    )
+    #search = GoogleSearchAPIWrapper(
+    #    google_api_key = os.getenv("Google_API_Key"),
+    #    google_cse_id = os.getenv("Google_CSE_ID"),
+    #    k=10
+    #)
     # Instantiate a datetime object for datetime functionality
     tools = [
         # Tool(
@@ -92,19 +91,19 @@ def chat_with_agent(user_input: str, chatbot_name: str):
         return response
 
 
-"""if __name__:
+if __name__:
     # Load environment variables from .env file
     load_dotenv(config["Key_File"])
     # Get the chatbot name from the config.yml file
     chatbot_name = "TolkAI"
     # Get the user input from the user
     #user_input = "Who are you?"
-    #user_input = "provide me with a step by step guide on how to create a time series in Power BI. In your answer, \
-    #include relevant images showing me where to click in Power BI so that I can easily follow up"
+    user_input = "provide me with a step by step guide on how to create a time series in Power BI. In your answer, \
+    include relevant images showing me where to click in Power BI so that I can easily follow up"
     #user_input = "What is the difference between a bar chart and a line chart?"
     #user_input = "Give me the python code to sum up all the elements in a list."
-    user_input = "Comment créer un diagramme en série temporelle dans Qlik Sense ?"
+    #user_input = "Comment créer un diagramme en série temporelle dans Qlik Sense ?"
     # Get the response from the agent
     response = chat_with_agent(user_input, chatbot_name)
     # Print the response
-    print(response)"""
+    print(response)

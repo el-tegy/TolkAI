@@ -116,9 +116,9 @@ def image_selection(query, client, data):
 def image_retrieval_pipeline(query):
     images = image_search(query)
     random.shuffle(images)
-    captions = image_captioning_parallel(images[:10])
+    captions = image_captioning_parallel(images[:15])
     df_items = pd.DataFrame(list(captions.items()), columns=['ImageURL', 'Caption'])
     try: 
         return image_selection(query, client, df_items)
     except:
-        return df_items[0]['ImageURL']
+        return images[0]

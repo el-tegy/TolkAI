@@ -1,128 +1,89 @@
-"""
-
-This module use google search to find images of a query, gemini-pro-vision to describe each image
-and a cosine similarity to get the relevant image which meet the most with your query
-
-"""
-import os
-from dotenv import load_dotenv
 import requests
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-from vertexai.preview.generative_models import GenerativeModel, Part
-#from IPython.display import Image, display
-url = "https://www.googleapis.com/customsearch/v1"
-total_images = 30 # Total number of images to download
-images_per_request = 10  # Maximum number of images per request
+import concurrent.futures
+from vertexai.preview.generative_models import GenerativeModel
 
-load_dotenv()
+PROJECT_ID = 'ping38'
+params = {
+    "cx": "b3cc7e87732c140e9",
+    "key": "AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
+    "searchType": "image",
+    "fileType": "BMP, GIF, JPEG, PNG"
+}
 
-def image_search(query):
-    all_images = []  # List to hold all the images
-
-    for start_index in range(1, total_images + 1, images_per_request):
-        params = {
-            "q": query,
-            "cx": os.getenv("Google_CSE_ID"),
-            "key": os.getenv("Google_API_Key"),
-            "searchType": "image",
-            "num": images_per_request,
-            "start": start_index,
-            "fileType": "BMP, GIF, JPEG, PNG"
-        }
+def fetch_data(url, params):
+    try:
         response = requests.get(url, params=params)
         data = response.json()
-        
         if 'items' in data:
-             all_images.extend(data['items'])
+            return [item['link'] for item in data['items']]
         else:
-            print('an error occured while searching')
+            return []
+    except Exception as e:
+        print(f"Error fetching data: {e}")
+        return []
+
+def image_search(query, total_images, images_per_request, url):
+    all_images = []
+    params["q"] = query
+    params["num"] = images_per_request
+    
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = []
+        for start_index in range(1, total_images + 1, images_per_request):
+            params_copy = params.copy()
+            params_copy["start"] = start_index
+            futures.append(executor.submit(fetch_data, url, params))
+
+        for future in concurrent.futures.as_completed(futures):
+            all_images.extend(future.result())
+
     return all_images
 
+def format_for_generate(image_urls, query):
+    formatted_list = ['"""Here is a python list of link of images :[']
+    
+    for url in image_urls:
+        formatted_list.append(f'\'""", """{url}""", """\'')
+        formatted_list.append(", '")
 
-def generate(image_link):
-    """
-    Description of the images 
+    # Remove the last comma and quote
+    if formatted_list:
+        formatted_list.pop()
 
-    Args:
-        image_link (str): link of the image
+    # Add closing brackets
+    formatted_list.append(']')
+    pre = '\"'
+    footer = f"""Now, here is a criterion for the relevance of images: {pre[0]}{query}{pre[0]}"
+    Have a carefull look at each image in the list provided before and select the image that illustrates the most \ 
+    the previous criterion among that list of images. Then, return a python list containing only the link of that best image among all."""
+    formatted_list.append(footer)
+    
+    formatted_list.append('"""]')
 
-    Returns:
-        str: A complete description of the images link
-    """
+
+    return formatted_list
+
+def generate(formatted_prompt):
     model = GenerativeModel("gemini-pro-vision")
     responses = model.generate_content(
-        [image_link, """Give me a brief description of this image"""],
+        formatted_prompt,
         generation_config={
-            "max_output_tokens": 1024,
-            "temperature": 0.4,
+            "max_output_tokens": 2048,
+            "temperature": 0.2,
             "top_p": 1,
             "top_k": 32
         },
     stream=True,
     )
-    result=""
-    for response in responses:
-        result+=response.candidates[0].content.parts[0].text
-    return result  
+    return " ".join([response.candidates[0].content.parts[0].text for response in responses])
 
-
-def image_captioning(list_of_items):
-    """
-    Gathering the description of images 
-
-    Args:
-        list_of_items (list): list of images found by google search
-
-    Returns:
-        list: a list which contains the description of each image
-    """
-    combined_texts=[]
-    items=list_of_items
-    items_links=[item['link'] for item in items]
-    for item in items_links:
-        try:
-            output = generate(item)
-            resume = output
-            #print(f"{item}")
-            combined_texts.append(resume)
-            #combined_texts.insert(0, user_query)
-            return combined_texts
-        except Exception as e:
-            return e
-
-def image_selection(list_of_combined_texts, items, query):
-    """
-    Resaech of the relevant images
-
-    Args:
-        list_of_combined_texts (list): list which conatins description of each image
-        items (list):list of images
-        query(str) : the initial query we are looking for an image
-
-    Returns:
-        str: A link of the relevant image
-    """
-    combined_texts=list_of_combined_texts
-    combined_texts.insert(0, query)
-    vectorizer = TfidfVectorizer()
-    tfidf_matrix = vectorizer.fit_transform(combined_texts)
-    cosine_similarities = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:])
-    most_similar_idx = cosine_similarities.argsort()[0][-1]
-    most_relevant_item = items[most_similar_idx]
-    return most_relevant_item['link']
-
-def image_retrieval_pipeline(image_label):
-    """
-    Research the relevant image of a label
-
-    Args:
-        image_label(str) : the label of images provide by Palm2
-
-    Returns:
-        str: A link of the relevant image
-    """
-    items = image_search(image_label)
-    combined_texts = image_captioning(items)
-    image_link = image_selection(combined_texts, items, image_label)
-    return image_link
+def image_retrieval_pipeline(query):
+    url = "https://www.googleapis.com/customsearch/v1"
+    total_images = 25 # Total number of images to download
+    images_per_request = 5  # Maximum number of images per request
+    query = query.replace("button", "")
+    image_urls = image_search(query=query, total_images=total_images, images_per_request=images_per_request, url=url)
+    formatted_prompt = format_for_generate(image_urls, query)
+    response = generate(formatted_prompt)
+    most_relevant_image = response[2:-2].replace(" ", "")
+    return most_relevant_image

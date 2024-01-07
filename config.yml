@@ -1,6 +1,6 @@
 chatbot:
   name: "TolkAI"
-Key_File: "key.env"
-OpenAI:
-  chat_temp: 0.0
-  llm_temp: 0.8
+Key_File: ".env"
+Gemini:
+  chat_temp: 0.1
+  llm_temp: 0.1

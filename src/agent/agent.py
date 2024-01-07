@@ -10,7 +10,7 @@ from parser.parser import CustomOutputParser
 from dotenv import load_dotenv
 from pathlib import Path
 from utils.config import load_config
-from image_retrieval_ import image_retrieval_pipeline
+from image_retrieval import image_retrieval_pipeline
 from codey import code_generation
 
 load_dotenv()
@@ -59,7 +59,9 @@ def setup_agent(chatbot_name):
     output_parser = CustomOutputParser()
 
     # Instantiate a ChatOpenAI object for language model interaction
-    llm = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E")
+    llm = ChatGoogleGenerativeAI(model="gemini-pro", 
+                                google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
+                                temperature=0.1)
 
     # Set up the LLMChain using the ChatOpenAI object and prompt template
     llm_chain = LLMChain(llm=llm, prompt=prompt)

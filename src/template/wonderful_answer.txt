@@ -1,0 +1,84 @@
+python3.9 ./agent/agent.py (query = "provide me with a step by step guide on how to create a heatmap in Power BI. In your answer, \
+    include relevant images showing me where to click in Power BI so that I can easily follow up")
+
+
+> Entering new AgentExecutor chain...
+Thought: To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
+Action: Image link from image label
+Action Input: Image of the 'get data' button in Power BI
+
+Observation:https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png       
+To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
+Action: Image link from image label
+Action Input: Image of the 'heatmap' visualization in Power BI
+
+Observation:https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg
+To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
+Action: Image link from image label
+Action Input: Image of the 'save' button in Power BI
+
+Observation:https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png
+To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
+Action: Image link from image label
+Action Input: Image of the 'publish' button in Power BI
+
+Observation:https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png
+I now know the final answer
+Final Answer: **Step 1: Import Data**
+
+1. Open Power BI Desktop.
+2. Click on the "Get Data" button in the Home tab.
+<https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>
+3. Select the data source you want to import from (e.g. Excel, CSV, SQL Server, etc.).
+4. Follow the prompts to import the data.
+
+**Step 2: Create a Heatmap**
+
+1. In the Power BI Desktop window, click on the "Visualizations" pane.
+2. Drag and drop the "Heatmap" visualization onto the canvas.
+<https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg>
+3. Select the fields you want to use for the x-axis, y-axis, and value.
+4. Adjust the settings of the heatmap as desired (e.g. color scheme, legend, etc.).
+
+**Step 3: Save the Report**
+
+1. Click on the "File" tab in the top left corner of the Power BI Desktop window.
+2. Select "Save" to save the report.
+<https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
+
+**Step 4: Publish the Report**
+
+1. Click on the "Publish" button in the Home tab.
+2. Select the destination you want to publish the report to (e.g. Power BI Service, SharePoint, etc.).
+3. Follow the prompts to publish the report.
+<https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
+
+> Finished chain.
+**Step 1: Import Data**
+
+1. Open Power BI Desktop.
+2. Click on the "Get Data" button in the Home tab.
+<https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>
+3. Select the data source you want to import from (e.g. Excel, CSV, SQL Server, etc.).
+4. Follow the prompts to import the data.
+
+**Step 2: Create a Heatmap**
+
+1. In the Power BI Desktop window, click on the "Visualizations" pane.
+2. Drag and drop the "Heatmap" visualization onto the canvas.
+<https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg>
+3. Select the fields you want to use for the x-axis, y-axis, and value.
+4. Adjust the settings of the heatmap as desired (e.g. color scheme, legend, etc.).
+
+**Step 3: Save the Report**
+
+1. Click on the "File" tab in the top left corner of the Power BI Desktop window.
+2. Select "Save" to save the report.
+<https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
+
+**Step 4: Publish the Report**
+
+1. Click on the "Publish" button in the Home tab.
+2. Select the destination you want to publish the report to (e.g. Power BI Service, SharePoint, etc.).
+3. Follow the prompts to publish the report.
+<https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>

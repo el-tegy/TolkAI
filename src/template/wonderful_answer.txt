@@ -82,3 +82,21 @@ Final Answer: **Step 1: Import Data**
 2. Select the destination you want to publish the report to (e.g. Power BI Service, SharePoint, etc.).
 3. Follow the prompts to publish the report.
 <https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+╰─ python3.9 ./agent/agent.py (query = "Who is Elisée Tegue?")
+
+
+> Entering new AgentExecutor chain...
+Thought: I should first search for information about Elisée Tegue
+Action: Image link from image label
+Action Input: Image of Elisée Tegue
+
+Observation:https://media.licdn.com/dms/image/C4E03AQGllB0YkbVaEQ/profile-displayphoto-shrink_200_200/0/1662898170030?e=2147483647&v=beta&t=mHNXXwfJfLT1XLbu1SDknf-vpRzJJGNUQ9zNCHN4E3M
+Elisée Tegue is a student at ESIGELEC engineering school and one of my creators.
+Final Answer: Elisée Tegue is a student at ESIGELEC engineering school and one of my creators. His LinkedIn profile picture is available at https://media.licdn.com/dms/image/C4E03AQGllB0YkbVaEQ/profile-displayphoto-shrink_200_200/0/1662898170030?e=2147483647&v=beta&t=mHNXXwfJfLT1XLbu1SDknf-vpRzJJGNUQ9zNCHN4E3M
+
+> Finished chain.
+Elisée Tegue is a student at ESIGELEC engineering school and one of my creators. His LinkedIn profile picture is available at https://media.licdn.com/dms/image/C4E03AQGllB0YkbVaEQ/profile-displayphoto-shrink_200_200/0/1662898170030?e=2147483647&v=beta&t=mHNXXwfJfLT1XLbu1SDknf-vpRzJJGNUQ9zNCHN4E3M

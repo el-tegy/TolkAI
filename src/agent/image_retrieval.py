@@ -79,7 +79,7 @@ def generate(formatted_prompt):
 
 def image_retrieval_pipeline(query):
     url = "https://www.googleapis.com/customsearch/v1"
-    total_images = 35 # Total number of images to download
+    total_images = 40 # Total number of images to download
     images_per_request = 5  # Maximum number of images per request
     query = query.replace("button", "")
     image_urls = image_search(query=query, total_images=total_images, images_per_request=images_per_request, url=url)

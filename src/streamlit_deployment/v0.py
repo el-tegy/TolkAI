@@ -1,75 +1,59 @@
 import streamlit as st
+
 import sys
-from agent.agent import setup_agent
-from agent.image_retrieval_gemini import image_retrieval_pipeline
 
-# Initialize the LangChain agent with OpenAI (or any other model you have)
-chatbot_name = 'TolkAI'
-agent_executor = setup_agent(chatbot_name)
+import sys
 
-# Title of the chatbot
-st.title(chatbot_name)
 
-# Initialize or load the chat history from the session state
-if 'chat_histories' not in st.session_state:
-    st.session_state.chat_histories = {}
 
-if 'current_chat' not in st.session_state:
-    st.session_state.current_chat = []
+sys.path.append('/Users/mnguemnin/Documents/Ping38/untitled folder/TolkAI')
 
-# Function to name the chat based on the first user prompt
-def name_chat(chat):
-    if chat:
-        # Use the first message as the name or a placeholder if empty
-        return chat[0].replace('You: ', '')[:50]  # Limit name to 50 characters
-    return "Unnamed Chat"
+from src.agent.agent import chat_with_agent
+#from agent.agent import chat_with_agent
+from langchain.memory import ConversationBufferMemory
+from langchain.memory import StreamlitChatMessageHistory
+from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 
-# Sidebar with chat history
-with st.sidebar:
-    st.header("Chat Histories")
-    # Display chat history names and make them selectable
-    chat_names = [name_chat(chat) for chat in st.session_state.chat_histories.values()]
-    selected_chat_name = st.radio('Select a chat to view', options=chat_names, index=0)
-    # Button to start a new chat
-    if st.button('New Chat'):
-        # Save current chat to history before starting a new chat
-        if st.session_state.current_chat:
-            chat_name = name_chat(st.session_state.current_chat)
-            st.session_state.chat_histories[chat_name] = st.session_state.current_chat
-        st.session_state.current_chat = []
+st.set_page_config(page_title="TalkAI")
+st.title('TalkAI')
 
-# Function to get response from LangChain agent and update conversation
-def get_response():
-    if user_input:
-        # Add user input to the current chat list
-        st.session_state.current_chat.append(f"You: {user_input}")
-        # Get the response from the LangChain agent
-        #response = langchain_agent.complete(user_input)
-        # Execute the agent with the given user_input and get the response
-        response = agent_executor.run(user_input)
-        # If the response is a dictionary, return the 'output' value, otherwise, return the response itself
-        if isinstance(response, dict):
-            response = response.get("output")
-        # Add the chatbot response to the current chat list
-        st.session_state.current_chat.append(f"Bot: {response}")
-        # Clear the input box
-        st.session_state.user_input = ''
 
-# User input text box
-user_input = st.text_input("Type your message here...", key="user_input")
 
-# Button to send the message
-send_button = st.button("Send", on_click=get_response)
+# Set up memory
+msgs = StreamlitChatMessageHistory(key="langchain_messages")
+memory = ConversationBufferMemory(memory_key="chat_history", chat_memory=msgs)
+reset_history = st.sidebar.button("Reset chat history")
+if len(msgs.messages) == 0 or reset_history:
+    msgs.clear()
+    msgs.add_ai_message("Hello my name is TalkAI. How can I help you?")
+    st.session_state["last_run"] = None
 
-# Display the current chat or a selected chat from history
-if chat_names:
-    # If a previous chat is selected, display it
-    if selected_chat_name != name_chat(st.session_state.current_chat):
-        selected_chat = st.session_state.chat_histories[selected_chat_name]
-        for message in selected_chat:
-            st.text_area("", message, height=70, key=message + str(selected_chat.index(message)))
-else:
-    # If no chat is selected, or it's the current chat, display the current chat
-    for message in st.session_state.current_chat:
-        st.text_area("", message, height=70, key=message + str(st.session_state.current_chat.index(message)))
+view_messages = st.expander("View the message contents in session state")
+#"st.session_state:", st.session_state.messages
+
+#for msg in st.session_state.messages:
+ #   st.chat_message(msg["role"]).write(msg["content"])
+for msg in msgs.messages:
+    #st.chat_message(msg.type).write(msg.content)
+    st.chat_message(msg.type).markdown(msg.content, unsafe_allow_html=True)
+
+if prompt := st.chat_input():
+    st.chat_message("human").write(prompt)
+    # Note: new messages are saved to history automatically by Langchain during run
+    response = chat_with_agent(prompt, "TalkAI", memory)
+    #st.chat_message("ai").write(response)
+    st.chat_message("ai").markdown(response, unsafe_allow_html=True)
+
+    # Draw the messages at the end, so newly generated ones show up immediately
+with view_messages:
+        """
+        Memory initialized with:
+        ```python
+        msgs = StreamlitChatMessageHistory(key="langchain_messages")
+        memory = ConversationBufferMemory(chat_memory=msgs)
+        ```
+
+        Contents of `st.session_state.langchain_messages`:
+        """
+        view_messages.json(st.session_state.langchain_messages)
 

@@ -11,7 +11,8 @@ from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path
 from utils.config import load_config
-from codey import code_generation
+from agent.image_retrieval import image_retrieval_pipeline
+from agent.codey import code_generation
 
 load_dotenv()
 # Load configuration from config.yml

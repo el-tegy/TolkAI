@@ -100,9 +100,10 @@ if __name__:
     chatbot_name = "TolkAI"
     # Get the user input from the user
     #user_input = "Who are you?"
-    user_input = "Who is Samuel Ladibe?"
+    #user_input = "Who is Samuel Ladibe?"
+    #user_input = "Où est situé le cameroun ?"
     #user_input = "Who is Elisée Tegue?"
-    #user_input = "provide me with a step by step guide on how to create a time series in Power BI." 
+    user_input = "provide me with a step by step guide on how to create a time series in Power BI." 
     # In your answer, \
     #include relevant images showing me where to click in Power BI so that I can easily follow up"
     #user_input = "What is the difference between a bar chart and a line chart?"

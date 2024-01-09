@@ -10,7 +10,7 @@ from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 
-st.set_page_config(page_title="TalkAI")
+st.set_page_config(page_title="TolkAI")
 st.title('TalkAI')
 
 

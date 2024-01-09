@@ -4,26 +4,29 @@ from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 from langchain.utilities import SerpAPIWrapper
 from langchain_community.utilities.google_search import GoogleSearchAPIWrapper
 from langchain.chains import LLMChain
+import sys
+sys.path.append('/Users/mnguemnin/Documents/Ping38/untitled folder/TolkAI/src')
 from template.template import CustomPromptTemplate, read_template
 from langchain_google_genai import ChatGoogleGenerativeAI
 from parser.parser import CustomOutputParser
 from dotenv import load_dotenv
+from datetime import datetime
 from pathlib import Path
 from utils.config import load_config
-from image_retrieval import image_retrieval_pipeline
+from agent.image_retrieval_gemini import image_retrieval_pipeline
 from codey import code_generation
 
 load_dotenv()
 # Load configuration from config.yml
 config = load_config()
 
-def setup_agent(chatbot_name):
+def setup_agent(chatbot_name, memory):
     # Instantiate a SerpAPIWrapper object for search functionality
-    #search = GoogleSearchAPIWrapper(
-    #    google_api_key = os.getenv("Google_API_Key"),
-    #    google_cse_id = os.getenv("Google_CSE_ID"),
-    #    k=10
-    #)
+    search = GoogleSearchAPIWrapper(
+        google_api_key = os.getenv("Google_API_Key"),
+        google_cse_id = os.getenv("Google_CSE_ID"),
+        k=10
+    )
     # Instantiate a datetime object for datetime functionality
     tools = [
         # Tool(
@@ -52,14 +55,14 @@ def setup_agent(chatbot_name):
         template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base.txt")).replace(
             "{chatbot_name}", chatbot_name),
         tools=tools,
-        input_variables=["input", "intermediate_steps"]
+        input_variables=["input", "intermediate_steps", "chat_history"]
     )
 
     # Instantiate a CustomOutputParser object for parsing output
     output_parser = CustomOutputParser()
 
     # Instantiate a ChatOpenAI object for language model interaction
-    llm = ChatGoogleGenerativeAI(model="gemini-pro", 
+    llm = ChatGoogleGenerativeAI(model="gemini-pro",
                                 google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
                                 temperature=0.1)
 
@@ -77,13 +80,13 @@ def setup_agent(chatbot_name):
     )
 
     # Create an AgentExecutor from the agent and tools with verbose output
-    agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True)
+    agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True, memory=memory)
     return agent_executor
 
 
-def chat_with_agent(user_input: str, chatbot_name: str):
+def chat_with_agent(user_input: str, chatbot_name: str, memory):
     # Set up the agent using the setup_agent() function
-    agent_executor = setup_agent(chatbot_name)
+    agent_executor = setup_agent(chatbot_name, memory)
     # Execute the agent with the given user_input and get the response
     response = agent_executor.run(user_input)
     # If the response is a dictionary, return the 'output' value, otherwise, return the response itself
@@ -93,23 +96,19 @@ def chat_with_agent(user_input: str, chatbot_name: str):
         return response
 
 
-if __name__:
+"""if __name__:
     # Load environment variables from .env file
     load_dotenv(config["Key_File"])
     # Get the chatbot name from the config.yml file
     chatbot_name = "TolkAI"
     # Get the user input from the user
     #user_input = "Who are you?"
-    #user_input = "Who is Samuel Ladibe?"
-    #user_input = "Où est situé le cameroun ?"
-    #user_input = "Who is Elisée Tegue?"
-    user_input = "provide me with a step by step guide on how to create a time series in Power BI." 
-    # In your answer, \
+    #user_input = "provide me with a step by step guide on how to create a time series in Power BI. In your answer, \
     #include relevant images showing me where to click in Power BI so that I can easily follow up"
     #user_input = "What is the difference between a bar chart and a line chart?"
     #user_input = "Give me the python code to sum up all the elements in a list."
-    #user_input = "Comment créer un diagramme en série temporelle dans Qlik Sense ?"
+    user_input = "Comment créer un diagramme en série temporelle dans Qlik Sense ?"
     # Get the response from the agent
     response = chat_with_agent(user_input, chatbot_name)
     # Print the response
-    print(response)
+    print(response)"""

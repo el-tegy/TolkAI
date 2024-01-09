@@ -12,6 +12,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from vertexai.preview.generative_models import GenerativeModel
 from concurrent.futures import ThreadPoolExecutor, as_completed , wait
+import sys
+sys.path.append('/Users/mnguemnin/Documents/Ping38/untitled folder/TolkAI/src/agent')
 from embedding_prediction_client import EmbeddingPredictionClient
 
 load_dotenv()
@@ -123,3 +125,4 @@ def image_retrieval_pipeline(query):
     elif len(df_items) == 0:
         print("DataFrame has zero rows.")
         return None  # ou une valeur par défaut
+print(image_retrieval_pipeline("Image of visual studio commit button"))

@@ -5,11 +5,7 @@ import sys
 import sys
 
 
-
-sys.path.append('/Users/mnguemnin/Documents/Ping38/untitled folder/TolkAI')
-
-from src.agent.agent import chat_with_agent
-#from agent.agent import chat_with_agent
+from agent.agent import chat_with_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent

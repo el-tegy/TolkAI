@@ -1,11 +1,9 @@
 # Import necessary modules and classes
 import os
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
-from langchain.utilities import SerpAPIWrapper
 from langchain_community.utilities.google_search import GoogleSearchAPIWrapper
 from langchain.chains import LLMChain
 import sys
-sys.path.append('/Users/mnguemnin/Documents/Ping38/untitled folder/TolkAI/src')
 from template.template import CustomPromptTemplate, read_template
 from langchain_google_genai import ChatGoogleGenerativeAI
 from parser.parser import CustomOutputParser
@@ -13,7 +11,6 @@ from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path
 from utils.config import load_config
-from agent.image_retrieval_gemini import image_retrieval_pipeline
 from codey import code_generation
 
 load_dotenv()

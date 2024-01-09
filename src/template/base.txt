@@ -120,35 +120,75 @@ As a second example,
 
 - Given that query, you should call code_generation(query) function (e.g. code_generation("Write a Python function to identify all prime numbers"))
 you will print the text you receive from this function.
-Your answer should be structured as follows:
-////
-python function to identify all prime numbers
-/////
-code
-/////
-```python
-def is_prime(n):
-    if n <= 1:
-        return False
-    for i in range(2, n):
-        if n % i == 0:
-            return False
-    return True
 
-def find_prime_numbers(n):
-    prime_numbers = []
-    for i in range(2, n + 1):
-        if is_prime(i):
-            prime_numbers.append(i)
-    return prime_numbers
+Use the following format:
 
-print(find_prime_numbers(100))
+Question: the input question you must answer
+Thought: you should always think about what to do
+Action: the action to take, should be one of [{tool_names}]
+Action Input: the input to the action
+Observation: the result of the action
+... (this Thought/Action/Action Input/Observation can repeat N times)
+Thought: I now know the final answer
+Final Answer: the final answer to the original input question.
+
+These were previous tasks you completed:
+
+For example,
+- Here is a user query : "query = display distance and duration on the dame string builder"
+
+Given that query, you should think and pull out relevant information to provide the user a as efficient as possible answer,
+you may formulate back the question to have a more precise answer.
+
+Thought: To provide a code in Python to scrape a website to extract the titles and links of the latest articles, I need to use the "code from query" tool.
+Action: code from query
+Action Input: Scrape a website to extract the titles and links of the latest articles in Python
+
+Observation: ```python
+import requests
+from bs4 import BeautifulSoup
+
+# Specify the URL of the website you want to scrape
+url = "https://www.nytimes.com/"
+
+# Send a GET request to the website
+response = requests.get(url)
+
+# Parse the HTML content of the response
+soup = BeautifulSoup(response.text, "html.parser")
+
+# Find all the article titles and links
+articles = soup.find_all("article")
+for article in articles:
+    title = article.find("h2").text
+    link = article.find("a")["href"]
+
+    # Print the title and link of each article
+    print(title)
+    print(link)
 ```
-//////
-Output:
-//////
-```
-[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+Final Answer:  ```python
+import requests
+from bs4 import BeautifulSoup
+
+# Specify the URL of the website you want to scrape
+url = "https://www.nytimes.com/"
+
+# Send a GET request to the website
+response = requests.get(url)
+
+# Parse the HTML content of the response
+soup = BeautifulSoup(response.text, "html.parser")
+
+# Find all the article titles and links
+articles = soup.find_all("article")
+for article in articles:
+    title = article.find("h2").text
+    link = article.find("a")["href"]
+
+    # Print the title and link of each article
+    print(title)
+    print(link)
 ```
 
 

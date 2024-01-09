@@ -11,7 +11,7 @@ from langchain.memory import StreamlitChatMessageHistory
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 
 st.set_page_config(page_title="TolkAI")
-st.title('TalkAI')
+st.title('TolkAI')
 
 
 
@@ -21,7 +21,7 @@ memory = ConversationBufferMemory(memory_key="chat_history", chat_memory=msgs)
 reset_history = st.sidebar.button("Reset chat history")
 if len(msgs.messages) == 0 or reset_history:
     msgs.clear()
-    msgs.add_ai_message("Hello my name is TalkAI. How can I help you?")
+    msgs.add_ai_message("Hello my name is TolkAI. How can I help you?")
     st.session_state["last_run"] = None
 
 view_messages = st.expander("View the message contents in session state")

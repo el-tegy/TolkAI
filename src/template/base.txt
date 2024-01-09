@@ -55,7 +55,7 @@ Final Answer: **Step 1: Import Data**
 
 1. Open Power BI Desktop.
 2. Click on the "Get Data" button in the Home tab.
-<img https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>
+<img src=https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>
 3. Select the data source you want to import from (e.g. Excel, CSV, SQL Server, etc.).
 4. Follow the prompts to import the data.
 
@@ -63,7 +63,7 @@ Final Answer: **Step 1: Import Data**
 
 1. In the Power BI Desktop window, click on the "Visualizations" pane.
 2. Drag and drop the "Heatmap" visualization onto the canvas.
-<img https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg>
+<img src=https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg>
 3. Select the fields you want to use for the x-axis, y-axis, and value.
 4. Adjust the settings of the heatmap as desired (e.g. color scheme, legend, etc.).
 
@@ -71,21 +71,21 @@ Final Answer: **Step 1: Import Data**
 
 1. Click on the "File" tab in the top left corner of the Power BI Desktop window.
 2. Select "Save" to save the report.
-<img https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
+<img src=https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
 
 **Step 4: Publish the Report**
 
 1. Click on the "Publish" button in the Home tab.
 2. Select the destination you want to publish the report to (e.g. Power BI Service, SharePoint, etc.).
 3. Follow the prompts to publish the report.
-<img https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
+<img src=https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
 
 > Finished chain.
 **Step 1: Import Data**
 
 1. Open Power BI Desktop.
 2. Click on the "Get Data" button in the Home tab.
-<img https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>
+<img src=https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>
 3. Select the data source you want to import from (e.g. Excel, CSV, SQL Server, etc.).
 4. Follow the prompts to import the data.
 
@@ -93,7 +93,7 @@ Final Answer: **Step 1: Import Data**
 
 1. In the Power BI Desktop window, click on the "Visualizations" pane.
 2. Drag and drop the "Heatmap" visualization onto the canvas.
-<img https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg>
+<img src=https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg>
 3. Select the fields you want to use for the x-axis, y-axis, and value.
 4. Adjust the settings of the heatmap as desired (e.g. color scheme, legend, etc.).
 
@@ -101,14 +101,14 @@ Final Answer: **Step 1: Import Data**
 
 1. Click on the "File" tab in the top left corner of the Power BI Desktop window.
 2. Select "Save" to save the report.
-<img https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
+<img src=https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
 
 **Step 4: Publish the Report**
 
 1. Click on the "Publish" button in the Home tab.
 2. Select the destination you want to publish the report to (e.g. Power BI Service, SharePoint, etc.).
 3. Follow the prompts to publish the report.
-<img https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
+<img src=https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
 
 """
 

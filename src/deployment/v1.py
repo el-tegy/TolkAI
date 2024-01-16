@@ -5,7 +5,7 @@ import sys
 import sys
 
 
-from agent.agent import chat_with_agent
+from src.agent.agent import chat_with_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent

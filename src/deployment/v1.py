@@ -4,9 +4,9 @@ import sys
 from pathlib import Path
 
 # Add the src directory to sys.path to allow for absolute imports
-root_dir = Path(__file__).resolve().parents[2]
+root_dir = Path(__file__).resolve().parents[1]
 sys.path.append(str(root_dir))
-from src.agent.agent import chat_with_agent
+from agent.agent import chat_with_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent

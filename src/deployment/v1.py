@@ -4,9 +4,8 @@ import sys
 
 import sys
 
-import os
-assert os.getcwd()=='Hello'
-#from agent.agent import chat_with_agent
+import os                
+from mount.src.agent.agent import chat_with_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent

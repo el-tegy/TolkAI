@@ -4,11 +4,13 @@ import sys
 
 import sys
 
-
-from agent.agent import chat_with_agent
+import os
+assert os.getcwd()=='Hello'
+#from agent.agent import chat_with_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
+
 
 st.set_page_config(page_title="TolkAI")
 st.title('TolkAI')

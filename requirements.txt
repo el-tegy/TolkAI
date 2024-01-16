@@ -6,3 +6,5 @@ python-dotenv==1.0.0
 google-api-python-client==2.100.0
 google_search_results==2.4.2
 pytest==7.3.1
+streamlit
+altair

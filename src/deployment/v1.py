@@ -14,9 +14,13 @@ import streamlit as st
 from google.oauth2 import service_account
 import googleapiclient.discovery
 
+
+scopes = ['https://www.googleapis.com/auth/cloud-platform']
+
 # Load the service account credentials from Streamlit secrets
 creds = service_account.Credentials.from_service_account_info(
-    st.secrets["service_account"]
+    st.secrets["service_account"],
+    scopes= scopes
 )
 
 # Use the credentials to authenticate your Google Cloud client

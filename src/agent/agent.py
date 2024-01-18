@@ -12,7 +12,7 @@ from langchain.chains import LLMChain
 import sys
 from template.template import CustomPromptTemplate, read_template
 from langchain_google_genai import ChatGoogleGenerativeAI
-from parser.parser import CustomOutputParser
+from src.parser.parser import CustomOutputParser
 from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path

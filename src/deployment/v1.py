@@ -13,18 +13,16 @@ from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 import streamlit as st
 from google.oauth2 import service_account
 import googleapiclient.discovery
+import google.auth
 
+# Retrieve the JSON key file path from Streamlit Secrets
+key_path = st.secrets["service_account"]
 
-scopes = ['https://www.googleapis.com/auth/cloud-platform']
+# Set the environment variable to point to the key file
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
 
-# Load the service account credentials from Streamlit secrets
-creds = service_account.Credentials.from_service_account_info(
-    st.secrets["service_account"],
-    scopes= scopes
-)
-
-# Use the credentials to authenticate your Google Cloud client
-service = googleapiclient.discovery.build('aiplatform', 'v1', credentials=creds)
+# Authenticate using the key file
+credentials, project_id = google.auth.default()
 
 
 st.set_page_config(page_title="TolkAI")

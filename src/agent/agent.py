@@ -4,8 +4,9 @@ import sys
 from pathlib import Path
 
 # Add the src directory to sys.path to allow for absolute imports
-root_dir = Path(__file__).resolve().parents[2]
+root_dir = Path(__file__).resolve().parents[1]
 sys.path.append(str(root_dir))
+os.chdir(root_dir)
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 from langchain_community.utilities.google_search import GoogleSearchAPIWrapper
 from langchain.chains import LLMChain

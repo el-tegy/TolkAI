@@ -10,6 +10,17 @@ from agent.agent import chat_with_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
+import streamlit as st
+from google.oauth2 import service_account
+import googleapiclient.discovery
+
+# Load the service account credentials from Streamlit secrets
+creds = service_account.Credentials.from_service_account_info(
+    st.secrets["service_account"]
+)
+
+# Use the credentials to authenticate your Google Cloud client
+service = googleapiclient.discovery.build('aiplatform', 'v1', credentials=creds)
 
 
 st.set_page_config(page_title="TolkAI")

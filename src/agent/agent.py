@@ -11,7 +11,7 @@ from langchain_community.utilities.google_search import GoogleSearchAPIWrapper
 from langchain.chains import LLMChain
 import sys
 from template.template import CustomPromptTemplate, read_template
-from parser.parser import CustomOutputParser
+from .parser.parser import CustomOutputParser
 from langchain_google_genai import ChatGoogleGenerativeAI
 from dotenv import load_dotenv
 from datetime import datetime

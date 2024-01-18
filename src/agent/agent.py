@@ -6,14 +6,13 @@ from pathlib import Path
 # Add the src directory to sys.path to allow for absolute imports
 root_dir = Path(__file__).resolve().parents[1]
 sys.path.append(str(root_dir))
-os.chdir(root_dir)
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 from langchain_community.utilities.google_search import GoogleSearchAPIWrapper
 from langchain.chains import LLMChain
 import sys
+from parser.parser import CustomOutputParser
 from template.template import CustomPromptTemplate, read_template
 from langchain_google_genai import ChatGoogleGenerativeAI
-from parser.parser import CustomOutputParser
 from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path

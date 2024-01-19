@@ -17,7 +17,7 @@ def code_generation(query):
             str: the answer of the model to the query
     """
     chat = ChatGoogleGenerativeAI(model="gemini-pro",
-                            google_api_key=google_gen_api_key,
+                            google_api_key=google_genai_api_key,
                             temperature=0.1)
     message = chat.invoke(query)
     return message.content

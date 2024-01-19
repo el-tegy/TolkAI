@@ -3,12 +3,10 @@ from langchain.prompts import ChatPromptTemplate
 import google.generativeai as genai
 import streamlit as st
 
+
 # Access API key stored in Streamlit's secrets
 google_api_key = st.secrets["api_keys"]["GOOGLE_API_KEY"]
 
-load_dotenv()
-# Load configuration from config.yml
-config = load_config()
 genai.configure(api_key=google_api_key)
 def code_generation(query):
     """

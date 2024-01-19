@@ -1,6 +1,8 @@
 import requests
 import concurrent.futures
-from vertexai.preview.generative_models import GenerativeModel
+from langchain_core.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
+import streamlit as st
 
 PROJECT_ID = 'ping38'
 params = {
@@ -9,6 +11,11 @@ params = {
     "searchType": "image",
     "fileType": "BMP, GIF, JPEG, PNG"
 }
+
+# Access API key stored in Streamlit's secrets
+google_api_key = st.secrets["api_keys"]["GOOGLE_API_KEY"]
+google_cse_id = st.secrets["api_keys"]["GOOGLE_CSE_ID"]
+google_genai_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
 
 def fetch_data(url, params):
     try:
@@ -64,18 +71,21 @@ def format_for_generate(image_urls, query):
     return formatted_list
 
 def generate(formatted_prompt):
-    model = GenerativeModel("gemini-pro-vision")
-    responses = model.generate_content(
-        formatted_prompt,
-        generation_config={
-            "max_output_tokens": 2048,
-            "temperature": 0.2,
-            "top_p": 1,
-            "top_k": 32
-        },
-    stream=True,
+    
+    model = ChatGoogleGenerativeAI(
+                                model="gemini-pro-vision",
+                                google_api_key=google_genai_api_key,
+                                temperature=0.1,
+                                max_output_tokens=2048,
+                                top_p=1,
+                                top_k=32
     )
-    return " ".join([response.candidates[0].content.parts[0].text for response in responses])
+    message = HumanMessage(
+        content=formatted_prompt
+    )
+    response = model.invoke([message])
+
+    return response.content
 
 def image_retrieval_pipeline(query):
     url = "https://www.googleapis.com/customsearch/v1"

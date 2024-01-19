@@ -20,10 +20,12 @@ from pathlib import Path
 from utils.config import load_config
 from agent.image_retrieval import image_retrieval_pipeline
 from agent.codey import code_generation
+import google.generativeai as genai
 
 load_dotenv()
 # Load configuration from config.yml
 config = load_config()
+genai.configure(api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E")
 
 def setup_agent(chatbot_name, memory):
     # Instantiate a SerpAPIWrapper object for search functionality

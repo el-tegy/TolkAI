@@ -80,8 +80,10 @@ def format_for_generate(image_urls, query):
 def generate(formatted_prompt):
     model = genai.GenerativeModel('gemini-pro-vision')
     responses = model.generate_content(
-        formatted_prompt,
-        "https://static.vecteezy.com/system/resources/thumbnails/022/010/648/small/black-background-modern-dark-abstract-texture-vector.jpg",
+        [
+         formatted_prompt,
+        "https://static.vecteezy.com/system/resources/thumbnails/022/010/648/small/black-background-modern-dark-abstract-texture-vector.jpg"
+        ],
         generation_config={
             "max_output_tokens": 2048,
             "temperature": 0.1,

@@ -9,8 +9,10 @@ services:
     environment:
       - STREAMLIT_SERVER_PORT=8501
       - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/FILE_NAME.json
     volumes:
       - app_volume:/home/app/data
+      - ~/.config/gcloud/application_default_credentials.json:/tmp/keys/FILE_NAME.json:ro
 
 volumes:
   app_volume:

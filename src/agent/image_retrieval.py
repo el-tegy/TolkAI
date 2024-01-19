@@ -92,7 +92,7 @@ def generate(formatted_prompt):
             "text": formatted_prompt
         },
         {"type": "image_url", 
-         "image_url": {}
+         "image_url": " "
         }]
     )
     response = model.invoke([message])

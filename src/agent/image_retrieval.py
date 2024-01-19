@@ -77,7 +77,7 @@ def format_for_generate(image_urls, query):
 
     return formatted_list
 
-def generate(formatted_prompt):
+def generate(image_urls,query):
     model = ChatGoogleGenerativeAI(
                                 model="gemini-pro-vision",
                                 google_api_key=google_genai_api_key,
@@ -86,14 +86,24 @@ def generate(formatted_prompt):
                                 top_p=1,
                                 top_k=32
     )
+    pre = '\"'
+    formatted_prompt = f"""Below is a list of link of images.  \
+    Now, here is a criterion for the relevance of images: {pre[0]}{query}{pre[0]}
+    Have a carefull look at each image in the list provided before and select the image that illustrates the most \ 
+    the previous criterion among that list of images. Then, return a python list containing only the link of that best image among all."""
+    
+
     message = HumanMessage(
-        content= [{
+        content= [
+        {
             "type": "text",
             "text": formatted_prompt
         },
-        {"type": "image_url", 
-         "image_url": " "
-        }]
+        {
+            "type": "image_url", 
+            "image_url": image_urls
+        }
+    ]
     )
     response = model.invoke([message])
 
@@ -105,7 +115,6 @@ def image_retrieval_pipeline(query):
     images_per_request = 5  # Maximum number of images per request
     query = query.replace("button", "")
     image_urls = image_search(query=query, total_images=total_images, images_per_request=images_per_request, url=url)
-    formatted_prompt = format_for_generate(image_urls, query)
-    response = generate(formatted_prompt)
+    response = generate(image_urls,query)
     most_relevant_image = response[2:-2].replace(" ", "")
     return most_relevant_image

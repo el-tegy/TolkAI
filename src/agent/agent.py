@@ -25,6 +25,8 @@ import streamlit as st
 
 # Access API key stored in Streamlit's secrets
 google_api_key = st.secrets["api_keys"]["GOOGLE_API_KEY"]
+google_cse_id = st.secrets["api_keys"]["GOOGLE_CSE_ID"]
+google_genai_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
 
 load_dotenv()
 # Load configuration from config.yml
@@ -34,8 +36,8 @@ genai.configure(api_key=google_api_key)
 def setup_agent(chatbot_name, memory):
     # Instantiate a SerpAPIWrapper object for search functionality
     search = GoogleSearchAPIWrapper(
-        google_api_key = os.getenv("Google_API_Key"),
-        google_cse_id = os.getenv("Google_CSE_ID"),
+        google_api_key = google_api_key,
+        google_cse_id = google_cse_id,
         k=10
     )
     # Instantiate a datetime object for datetime functionality
@@ -74,7 +76,7 @@ def setup_agent(chatbot_name, memory):
 
     # Instantiate a ChatOpenAI object for language model interaction
     llm = ChatGoogleGenerativeAI(model="gemini-pro",
-                                google_api_key=google_api_key,
+                                google_api_key=google_genai_api_key,
                                 temperature=0.1)
 
     # Set up the LLMChain using the ChatOpenAI object and prompt template

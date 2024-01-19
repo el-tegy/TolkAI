@@ -97,14 +97,14 @@ def generate(formatted_prompt):
     "category": "HARM_CATEGORY_HARASSMENT",
     "threshold": "BLOCK_NONE"}]
 	)
-    responses = model.generate_content(
+    response = model.generate_content(
         [
             formatted_prompt[0], 
             noisy_image
         ], 
         stream=True
     )
-    return " ".join([response.candidates[0].content.parts[0].text for response in responses])
+    return response.text
 
 def image_retrieval_pipeline(query):
     url = "https://www.googleapis.com/customsearch/v1"

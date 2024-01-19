@@ -1,5 +1,15 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import ChatPromptTemplate
+import google.generativeai as genai
+import streamlit as st
+
+# Access API key stored in Streamlit's secrets
+google_api_key = st.secrets["api_keys"]["GOOGLE_API_KEY"]
+
+load_dotenv()
+# Load configuration from config.yml
+config = load_config()
+genai.configure(api_key=google_api_key)
 def code_generation(query):
     """
         Generate code from query
@@ -11,7 +21,7 @@ def code_generation(query):
             str: the answer of the model to the query
     """
     chat = ChatGoogleGenerativeAI(model="models/codechat-bison",
-                            google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
+                            google_api_key=google_api_key,
                             temperature=0.1)
     message = chat.invoke(query)
     return message.content

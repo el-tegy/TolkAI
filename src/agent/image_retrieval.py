@@ -77,37 +77,19 @@ def format_for_generate(image_urls, query):
 
     return formatted_list
 
-def generate(image_urls,query):
-    model = ChatGoogleGenerativeAI(
-                                model="gemini-pro-vision",
-                                google_api_key=google_genai_api_key,
-                                temperature=0.1,
-                                max_output_tokens=2048,
-                                top_p=1,
-                                top_k=32
-    )
-    pre = '\"'
-    formatted_prompt = f"""Below is a list of link of images.  \
-    Now, here is a criterion for the relevance of images: {pre[0]}{query}{pre[0]}
-    Have a carefull look at each image in the list provided before and select the image that illustrates the most \ 
-    the previous criterion among that list of images. Then, return a python list containing only the link of that best image among all."""
-    
-
-    message = HumanMessage(
-        content= [
-        {
-            "type": "text",
-            "text": formatted_prompt
+def generate(formatted_prompt):
+    model = genai.GenerativeModel('gemini-pro-vision')
+    responses = model.generate_content(
+        formatted_prompt,
+        generation_config={
+            "max_output_tokens": 2048,
+            "temperature": 0.2,
+            "top_p": 1,
+            "top_k": 32
         },
-        {
-            "type": "image_url", 
-            "image_url": image_urls
-        }
-    ]
+    stream=True,
     )
-    response = model.invoke([message])
-
-    return response.content
+    return " ".join([response.candidates[0].content.parts[0].text for response in responses])
 
 def image_retrieval_pipeline(query):
     url = "https://www.googleapis.com/customsearch/v1"
@@ -115,6 +97,7 @@ def image_retrieval_pipeline(query):
     images_per_request = 5  # Maximum number of images per request
     query = query.replace("button", "")
     image_urls = image_search(query=query, total_images=total_images, images_per_request=images_per_request, url=url)
-    response = generate(image_urls,query)
+    formatted_prompt = format_for_generate(image_urls, query)
+    response = generate(formatted_prompt)
     most_relevant_image = response[2:-2].replace(" ", "")
     return most_relevant_image

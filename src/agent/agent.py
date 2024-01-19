@@ -31,7 +31,7 @@ google_genai_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
 load_dotenv()
 # Load configuration from config.yml
 config = load_config()
-genai.configure(api_key=google_api_key)
+genai.configure(api_key=google_genai_api_key)
 
 def setup_agent(chatbot_name, memory):
     # Instantiate a SerpAPIWrapper object for search functionality

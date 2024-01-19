@@ -1,5 +1,6 @@
 import requests
 import concurrent.futures
+from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 import streamlit as st
@@ -17,6 +18,9 @@ google_api_key = st.secrets["api_keys"]["GOOGLE_API_KEY"]
 google_cse_id = st.secrets["api_keys"]["GOOGLE_CSE_ID"]
 google_genai_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
 
+load_dotenv()
+# Load configuration from config.yml
+config = load_config()
 genai.configure(api_key=google_genai_api_key)
 def fetch_data(url, params):
     try:
@@ -72,7 +76,6 @@ def format_for_generate(image_urls, query):
     return formatted_list
 
 def generate(formatted_prompt):
-    
     model = ChatGoogleGenerativeAI(
                                 model="gemini-pro-vision",
                                 google_api_key=google_genai_api_key,

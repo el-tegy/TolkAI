@@ -27,12 +27,6 @@ creds = service_account.Credentials.from_service_account_info(
 # Use the credentials to authenticate your Google Cloud client
 service = googleapiclient.discovery.build('aiplatform', 'v1', credentials=creds)
 
-aiplatform.init(
-    project='ping38',
-    location='us-west4',
-    credentials=creds
-)
-
 st.set_page_config(page_title="TolkAI")
 st.title('TolkAI')
 

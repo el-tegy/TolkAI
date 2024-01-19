@@ -88,10 +88,10 @@ def generate(formatted_prompt):
         })
     responses = model.generate_content(
         [
-         formatted_prompt[0],
-        "https://static.vecteezy.com/system/resources/thumbnails/022/010/648/small/black-background-modern-dark-abstract-texture-vector.jpg"
-        ],
-    stream=True,
+            formatted_prompt[0], 
+            "https://static.vecteezy.com/system/resources/thumbnails/022/010/648/small/black-background-modern-dark-abstract-texture-vector.jpg"
+        ], 
+        stream=True
     )
     return " ".join([response.candidates[0].content.parts[0].text for response in responses])
 

@@ -1,13 +1,8 @@
-import requests
-from PIL import Image
-from io import BytesIO
-import concurrent.futures
-from dotenv import load_dotenv
-from langchain_core.messages import HumanMessage
-from langchain_google_genai import ChatGoogleGenerativeAI
 import streamlit as st
-import google.generativeai as genai
-from utils.config import load_config
+import requests
+import vertexai
+import concurrent.futures
+from vertexai.preview.generative_models import GenerativeModel
 
 PROJECT_ID = 'ping38'
 params = {
@@ -17,15 +12,12 @@ params = {
     "fileType": "BMP, GIF, JPEG, PNG"
 }
 
-# Access API key stored in Streamlit's secrets
-google_api_key = st.secrets["api_keys"]["GOOGLE_API_KEY"]
-google_cse_id = st.secrets["api_keys"]["GOOGLE_CSE_ID"]
-google_genai_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
+creds = st.secrets["service_account"]
+vertexai.init(
+    project='ping38',
+    credentials=creds
+)
 
-load_dotenv()
-# Load configuration from config.yml
-config = load_config()
-genai.configure(api_key=google_genai_api_key)
 def fetch_data(url, params):
     try:
         response = requests.get(url, params=params)
@@ -71,8 +63,7 @@ def format_for_generate(image_urls, query):
     pre = '\"'
     footer = f"""Now, here is a criterion for the relevance of images: {pre[0]}{query}{pre[0]}"
     Have a carefull look at each image in the list provided before and select the image that illustrates the most \ 
-    the previous criterion among that list of images. Then, return a python list containing only the link of that best image among all.
-    For your answer, you must and have to only consider the images hereabove, excluding anyone else coming after."""
+    the previous criterion among that list of images. Then, return a python list containing only the link of that best image among all."""
     formatted_list.append(footer)
     
     formatted_list.append('"""]')
@@ -81,29 +72,16 @@ def format_for_generate(image_urls, query):
     return formatted_list
 
 def generate(formatted_prompt):
-    noisy_image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg/800px-Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg"
-    response = requests.get(noisy_image_url)
-    # Open the image
-    noisy_image = Image.open(BytesIO(response.content))
-
-    model = genai.GenerativeModel(
-        'gemini-pro-vision',
+    model = GenerativeModel("gemini-pro-vision")
+    responses = model.generate_content(
+        formatted_prompt,
         generation_config={
             "max_output_tokens": 2048,
-            "temperature": 0.1,
+            "temperature": 0.2,
             "top_p": 1,
             "top_k": 32
         },
-        safety_settings=[{
-    "category": "HARM_CATEGORY_HARASSMENT",
-    "threshold": "BLOCK_NONE"}]
-	)
-    responses = model.generate_content(
-        [
-            formatted_prompt[0], 
-            noisy_image
-        ], 
-        stream=True
+    stream=True,
     )
     return " ".join([response.candidates[0].content.parts[0].text for response in responses])
 
@@ -117,3 +95,6 @@ def image_retrieval_pipeline(query):
     response = generate(formatted_prompt)
     most_relevant_image = response[2:-2].replace(" ", "")
     return most_relevant_image
+
+query = "image of 'get data' in Power BI"
+print(image_retrieval_pipeline(query))

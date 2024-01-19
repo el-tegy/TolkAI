@@ -104,6 +104,7 @@ def generate(formatted_prompt):
         ], 
         stream=True
     )
+    response.resolve()
     return response.text
 
 def image_retrieval_pipeline(query):

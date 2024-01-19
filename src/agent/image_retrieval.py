@@ -87,10 +87,13 @@ def generate(formatted_prompt):
                                 top_k=32
     )
     message = HumanMessage(
-        content= {
+        content= [{
             "type": "text",
             "text": formatted_prompt
-        }
+        },
+        {"type": "image_url", 
+         "image_url": {}
+        }]
     )
     response = model.invoke([message])
 

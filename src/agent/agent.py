@@ -21,11 +21,15 @@ from utils.config import load_config
 from agent.image_retrieval import image_retrieval_pipeline
 from agent.codey import code_generation
 import google.generativeai as genai
+import streamlit as st
+
+# Access API key stored in Streamlit's secrets
+google_api_key = st.secrets["api_keys"]["GOOGLE_API_KEY"]
 
 load_dotenv()
 # Load configuration from config.yml
 config = load_config()
-genai.configure(api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E")
+genai.configure(api_key=google_api_key)
 
 def setup_agent(chatbot_name, memory):
     # Instantiate a SerpAPIWrapper object for search functionality
@@ -70,7 +74,7 @@ def setup_agent(chatbot_name, memory):
 
     # Instantiate a ChatOpenAI object for language model interaction
     llm = ChatGoogleGenerativeAI(model="gemini-pro",
-                                google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
+                                google_api_key=google_api_key,
                                 temperature=0.1)
 
     # Set up the LLMChain using the ChatOpenAI object and prompt template

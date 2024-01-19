@@ -17,6 +17,7 @@ google_api_key = st.secrets["api_keys"]["GOOGLE_API_KEY"]
 google_cse_id = st.secrets["api_keys"]["GOOGLE_CSE_ID"]
 google_genai_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
 
+genai.configure(api_key=google_genai_api_key)
 def fetch_data(url, params):
     try:
         response = requests.get(url, params=params)

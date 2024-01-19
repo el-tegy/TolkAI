@@ -3,7 +3,7 @@ version: '3.8'
 services:
   chatbot:
     build: .
-    image: tolkai:latest  # Remplacez tolkai par le nom de votre choix
+    image: tolkai:latest  
     container_name: tolkai
     ports:
       - "8501:8501"

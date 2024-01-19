@@ -14,6 +14,9 @@ import streamlit as st
 from google.oauth2 import service_account
 import googleapiclient.discovery
 import google.auth
+import vertexai
+
+vertexai.init(project="ping38", location="europe-west9")
 
 # Retrieve the JSON key file path from Streamlit Secrets
 key_path = st.secrets["service_account"]

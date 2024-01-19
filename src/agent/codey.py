@@ -10,7 +10,7 @@ def code_generation(query):
         Returns:
             str: the answer of the model to the query
     """
-    chat = ChatGoogleGenerativeAI(model="codechat-bison",
+    chat = ChatGoogleGenerativeAI(model="models/codechat-bison",
                             google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
                             temperature=0.1)
     message = chat.invoke(query)

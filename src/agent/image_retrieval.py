@@ -1,5 +1,5 @@
 import requests
-import PIL.Image
+from PIL import Image
 from io import BytesIO
 import concurrent.futures
 from dotenv import load_dotenv
@@ -80,8 +80,8 @@ def format_for_generate(image_urls, query):
     return formatted_list
 
 def generate(formatted_prompt):
-    noisy_image_url = "https://static.vecteezy.com/system/resources/thumbnails/022/010/648/small/black-background-modern-dark-abstract-texture-vector.jpg"
-    response = requests.get(image_url)
+    noisy_image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg/800px-Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg"
+    response = requests.get(noisy_image_url)
     # Open the image
     noisy_image = Image.open(BytesIO(response.content))
 
@@ -92,7 +92,11 @@ def generate(formatted_prompt):
             "temperature": 0.1,
             "top_p": 1,
             "top_k": 32
-        })
+        },
+        safety_settings=[{
+    "category": "HARM_CATEGORY_HARASSMENT",
+    "threshold": "BLOCK_NONE"}]
+	)
     responses = model.generate_content(
         [
             formatted_prompt[0], 

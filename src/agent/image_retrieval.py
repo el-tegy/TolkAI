@@ -71,7 +71,8 @@ def format_for_generate(image_urls, query):
     pre = '\"'
     footer = f"""Now, here is a criterion for the relevance of images: {pre[0]}{query}{pre[0]}"
     Have a carefull look at each image in the list provided before and select the image that illustrates the most \ 
-    the previous criterion among that list of images. Then, return a python list containing only the link of that best image among all."""
+    the previous criterion among that list of images. Then, return a python list containing only the link of that best image among all.
+    For your answer, you must and have to only consider the images hereabove, excluding anyone else coming after."""
     formatted_list.append(footer)
     
     formatted_list.append('"""]')

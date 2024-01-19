@@ -17,15 +17,13 @@ import google.auth
 import vertexai
 from google.cloud import aiplatform
 
-vertexai.init(project="ping38", location="us-west4")
+vertexai.init(project="ping38", location="europe-west9")
 
-# Load the service account credentials from Streamlit secrets
-creds = service_account.Credentials.from_service_account_info(
-    st.secrets["service_account"]
-)
+# Retrieve the JSON key file path from Streamlit Secrets
+key_path = st.secrets["service_account"]
 
-# Use the credentials to authenticate your Google Cloud client
-service = googleapiclient.discovery.build('aiplatform', 'v1', credentials=creds)
+# Authenticate using the key file
+credentials, project_id = google.auth.default()
 
 st.set_page_config(page_title="TolkAI")
 st.title('TolkAI')

@@ -1,5 +1,6 @@
 import requests
 import PIL.Image
+from io import BytesIO
 import concurrent.futures
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
@@ -79,7 +80,11 @@ def format_for_generate(image_urls, query):
     return formatted_list
 
 def generate(formatted_prompt):
-    noisy_img = PIL.Image.open("https://static.vecteezy.com/system/resources/thumbnails/022/010/648/small/black-background-modern-dark-abstract-texture-vector.jpg")
+    noisy_image_url = "https://static.vecteezy.com/system/resources/thumbnails/022/010/648/small/black-background-modern-dark-abstract-texture-vector.jpg"
+    response = requests.get(image_url)
+    # Open the image
+    noisy_image = Image.open(BytesIO(response.content))
+
     model = genai.GenerativeModel(
         'gemini-pro-vision',
         generation_config={
@@ -91,7 +96,7 @@ def generate(formatted_prompt):
     responses = model.generate_content(
         [
             formatted_prompt[0], 
-            noisy_img
+            noisy_image
         ], 
         stream=True
     )

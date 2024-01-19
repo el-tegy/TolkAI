@@ -80,7 +80,7 @@ def format_for_generate(image_urls, query):
     return formatted_list
 
 def generate(formatted_prompt):
-    noisy_image_url = "https://img.freepik.com/free-vector/white-abstract-background-design_23-2148825582.jpg"
+    noisy_image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg/800px-Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg"
     response = requests.get(noisy_image_url)
     # Open the image
     noisy_image = Image.open(BytesIO(response.content))
@@ -97,15 +97,14 @@ def generate(formatted_prompt):
     "category": "HARM_CATEGORY_HARASSMENT",
     "threshold": "BLOCK_NONE"}]
 	)
-    response = model.generate_content(
+    responses = model.generate_content(
         [
             formatted_prompt[0], 
             noisy_image
         ], 
         stream=True
     )
-    response.resolve()
-    return response.text
+    return " ".join([response.candidates[0].content.parts[0].text for response in responses])
 
 def image_retrieval_pipeline(query):
     url = "https://www.googleapis.com/customsearch/v1"

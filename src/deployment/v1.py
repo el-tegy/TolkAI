@@ -16,7 +16,7 @@ import googleapiclient.discovery
 import google.auth
 import vertexai
 
-vertexai.init(project="ping38", location="us-west4")
+vertexai.init(project="ping38", location="us-central1")
 
 # Load the service account credentials from Streamlit secrets
 creds = service_account.Credentials.from_service_account_info(

@@ -16,15 +16,9 @@ def code_generation(query):
         Returns:
             str: the answer of the model to the query
     """
-    llm = ChatGoogleGenerativeAI(model="gemini-pro",
+    chat = ChatGoogleGenerativeAI(model="gemini-pro",
                             google_api_key=google_gen_api_key,
                             temperature=0.1)
-    chat = ChatVertexAI(
-        model_name="codechat-bison", 
-        max_output_tokens=2500, 
-        temperature=0.1, 
-        credentials=creds
-    )
     message = chat.invoke(query)
     return message.content
 

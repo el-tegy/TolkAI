@@ -2,11 +2,13 @@ from langchain.chat_models import ChatVertexAI
 from langchain.prompts import ChatPromptTemplate
 import google.generativeai as genai
 import streamlit as st
-
+from google.oauth2 import service_account
 
 # Access API key stored in Streamlit's secrets
 google_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
-
+creds = service_account.Credentials.from_service_account_info(
+    st.secrets["service_account"]
+)
 genai.configure(api_key=google_api_key)
 def code_generation(query):
     """
@@ -19,7 +21,10 @@ def code_generation(query):
             str: the answer of the model to the query
     """
     chat = ChatVertexAI(
-        model_name="codechat-bison", max_output_tokens=2500, temperature=0.1
+        model_name="codechat-bison", 
+        max_output_tokens=2500, 
+        temperature=0.1, 
+        credentials=creds
     )
     message = chat.invoke(query)
     return message.content

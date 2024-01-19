@@ -4,8 +4,8 @@ import google.generativeai as genai
 import streamlit as st
 
 # Access API key stored in Streamlit's secrets
-google_gen_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
-genai.configure(api_key=google_api_key)
+google_genai_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
+genai.configure(api_key=google_genai_api_key)
 def code_generation(query):
     """
         Generate code from query

@@ -1,4 +1,4 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.chat_models import ChatVertexAI
 from langchain.prompts import ChatPromptTemplate
 import google.generativeai as genai
 import streamlit as st
@@ -18,9 +18,9 @@ def code_generation(query):
         Returns:
             str: the answer of the model to the query
     """
-    chat = ChatGoogleGenerativeAI(model="models/codechat-bison",
-                            google_api_key=google_api_key,
-                            temperature=0.1)
+    chat = ChatVertexAI(
+        model_name="codechat-bison", max_output_tokens=2500, temperature=0.1
+    )
     message = chat.invoke(query)
     return message.content
 

@@ -17,7 +17,7 @@ import google.auth
 import vertexai
 from google.cloud import aiplatform
 
-vertexai.init(project="ping38", location="europe-west9")
+vertexai.init(project="ping38", location="us-west4")
 
 # Retrieve the JSON key file path from Streamlit Secrets
 key_path = st.secrets["service_account"]

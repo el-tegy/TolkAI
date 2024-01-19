@@ -3,6 +3,10 @@ import requests
 import vertexai
 import concurrent.futures
 from vertexai.preview.generative_models import GenerativeModel
+from google.oauth2 import service_account
+
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["service_account"])
 
 PROJECT_ID = 'ping38'
 params = {
@@ -12,10 +16,9 @@ params = {
     "fileType": "BMP, GIF, JPEG, PNG"
 }
 
-creds = st.secrets["service_account"]
 vertexai.init(
     project='ping38',
-    credentials=creds
+    credentials=credentials
 )
 
 def fetch_data(url, params):
@@ -95,6 +98,3 @@ def image_retrieval_pipeline(query):
     response = generate(formatted_prompt)
     most_relevant_image = response[2:-2].replace(" ", "")
     return most_relevant_image
-
-query = "image of 'get data' in Power BI"
-print(image_retrieval_pipeline(query))

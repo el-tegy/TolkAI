@@ -18,14 +18,13 @@ import vertexai
 
 vertexai.init(project="ping38", location="europe-west9")
 
-# Retrieve the JSON key file path from Streamlit Secrets
-key_path = st.secrets["service_account"]
+# Load the service account credentials from Streamlit secrets
+creds = service_account.Credentials.from_service_account_info(
+    st.secrets["service_account"]
+)
 
-# Set the environment variable to point to the key file
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
-
-# Authenticate using the key file
-credentials, project_id = google.auth.default()
+# Use the credentials to authenticate your Google Cloud client
+service = googleapiclient.discovery.build('aiplatform', 'v1', credentials=creds)
 
 
 st.set_page_config(page_title="TolkAI")

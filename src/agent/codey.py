@@ -1,4 +1,4 @@
-from langchain.chat_models import ChatVertexAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import ChatPromptTemplate
 def code_generation(query):
     """
@@ -10,10 +10,9 @@ def code_generation(query):
         Returns:
             str: the answer of the model to the query
     """
-    chat = ChatVertexAI(
-        model_name="codechat-bison", max_output_tokens=1000, temperature=0.5
-    )
-
+    chat = ChatGoogleGenerativeAI(model="codechat-bison",
+                            google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
+                            temperature=0.1)
     message = chat.invoke(query)
     return message.content
 

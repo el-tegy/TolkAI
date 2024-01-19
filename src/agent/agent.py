@@ -4,13 +4,14 @@ from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 from langchain_community.utilities.google_search import GoogleSearchAPIWrapper
 from langchain.chains import LLMChain
 import sys
+sys.path.append('C:/Users/user/ping3/TolkAI/src')
 from template.template import CustomPromptTemplate, read_template
 from langchain_google_genai import ChatGoogleGenerativeAI
 from parser.parser import CustomOutputParser
 from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path
-from utils.config import load_config
+from utils.config import load_config 
 from agent.image_retrieval import image_retrieval_pipeline
 from agent.codey import code_generation
 
@@ -36,21 +37,19 @@ def setup_agent(chatbot_name, memory):
         Tool(
             name="Image link from image label",
             func=image_retrieval_pipeline,
-            description="This tool returns a image link given an image label passed as a parameter. \
-                Utilize this tool to fetch links of images you need to enhance your answer, by passing it images labels \
-                such as 'Image of the 'get data' button in Power BI'."
+            description="Useful when someone asks for advice on how to accomplish a specific task in data analytics software like Power BI Desktop or Tableau, you can enhance your responses by adding links to images."
         ),
         Tool(
             name="code from query",
             func=code_generation,
-            description="This tool returns a code from a query that necessitates code generation. \
-                Utilize this tool to answer questions that ask for programs, scrips, code or algorithms."
+            description="Useful when you want to answer questions or advice realted to language of programmation, programs, scrips, code or algorithms."
+
         ),
     ]
 
     # Set up the prompt template using the base.txt file and the tools list
     prompt = CustomPromptTemplate(
-        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base.txt")).replace(
+        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base_ongolo.txt")).replace(
             "{chatbot_name}", chatbot_name),
         tools=tools,
         input_variables=["input", "intermediate_steps", "chat_history"]

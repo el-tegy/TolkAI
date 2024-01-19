@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 import streamlit as st
+from utils.config import load_config
 
 PROJECT_ID = 'ping38'
 params = {

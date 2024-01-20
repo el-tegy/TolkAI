@@ -1,6 +1,11 @@
 import requests
 import concurrent.futures
-from vertexai.preview.generative_models import GenerativeModel
+from dotenv import load_dotenv
+from langchain_core.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
+import streamlit as st
+import google.generativeai as genai
+from utils.config import load_config
 
 PROJECT_ID = 'ping38'
 params = {
@@ -10,6 +15,15 @@ params = {
     "fileType": "BMP, GIF, JPEG, PNG"
 }
 
+# Access API key stored in Streamlit's secrets
+google_api_key = st.secrets["api_keys"]["GOOGLE_API_KEY"]
+google_cse_id = st.secrets["api_keys"]["GOOGLE_CSE_ID"]
+google_genai_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
+
+load_dotenv()
+# Load configuration from config.yml
+config = load_config()
+genai.configure(api_key=google_genai_api_key)
 def fetch_data(url, params):
     try:
         response = requests.get(url, params=params)
@@ -63,19 +77,37 @@ def format_for_generate(image_urls, query):
 
     return formatted_list
 
-def generate(formatted_prompt):
-    model = GenerativeModel("gemini-pro-vision")
-    responses = model.generate_content(
-        formatted_prompt,
-        generation_config={
-            "max_output_tokens": 2048,
-            "temperature": 0.2,
-            "top_p": 1,
-            "top_k": 32
-        },
-    stream=True,
+def generate(image_urls,query):
+    model = ChatGoogleGenerativeAI(
+                                model="gemini-pro-vision",
+                                google_api_key=google_genai_api_key,
+                                temperature=0.1,
+                                max_output_tokens=2048,
+                                top_p=1,
+                                top_k=32
     )
-    return " ".join([response.candidates[0].content.parts[0].text for response in responses])
+    pre = '\"'
+    formatted_prompt = f"""Below is a list of link of images.  \
+    Now, here is a criterion for the relevance of images: {pre[0]}{query}{pre[0]}
+    Have a carefull look at each image in the list provided before and select the image that illustrates the most \ 
+    the previous criterion among that list of images. Then, return a python list containing only the link of that best image among all."""
+    
+
+    message = HumanMessage(
+        content= [
+        {
+            "type": "text",
+            "text": formatted_prompt
+        },
+        {
+            "type": "image_url", 
+            "image_url": image_urls
+        }
+    ]
+    )
+    response = model.invoke([message])
+
+    return response.content
 
 def image_retrieval_pipeline(query):
     url = "https://www.googleapis.com/customsearch/v1"
@@ -83,7 +115,6 @@ def image_retrieval_pipeline(query):
     images_per_request = 5  # Maximum number of images per request
     query = query.replace("button", "")
     image_urls = image_search(query=query, total_images=total_images, images_per_request=images_per_request, url=url)
-    formatted_prompt = format_for_generate(image_urls, query)
-    response = generate(formatted_prompt)
+    response = generate(image_urls,query)
     most_relevant_image = response[2:-2].replace(" ", "")
     return most_relevant_image

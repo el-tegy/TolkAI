@@ -1,28 +1,43 @@
 # Import necessary modules and classes
 import os
+import sys
+from pathlib import Path
+
+# Add the src directory to sys.path to allow for absolute imports
+root_dir = Path(__file__).resolve().parents[1]
+sys.path.append(str(root_dir))
+os.chdir(root_dir)
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 from langchain_community.utilities.google_search import GoogleSearchAPIWrapper
 from langchain.chains import LLMChain
 import sys
 from template.template import CustomPromptTemplate, read_template
+from parse.parser import CustomOutputParser
 from langchain_google_genai import ChatGoogleGenerativeAI
-from parser.parser import CustomOutputParser
 from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path
 from utils.config import load_config
 from agent.image_retrieval import image_retrieval_pipeline
 from agent.codey import code_generation
+import google.generativeai as genai
+import streamlit as st
+
+# Access API key stored in Streamlit's secrets
+google_api_key = st.secrets["api_keys"]["GOOGLE_API_KEY"]
+google_cse_id = st.secrets["api_keys"]["GOOGLE_CSE_ID"]
+google_genai_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
 
 load_dotenv()
 # Load configuration from config.yml
 config = load_config()
+genai.configure(api_key=google_genai_api_key)
 
 def setup_agent(chatbot_name, memory):
     # Instantiate a SerpAPIWrapper object for search functionality
     search = GoogleSearchAPIWrapper(
-        google_api_key = os.getenv("Google_API_Key"),
-        google_cse_id = os.getenv("Google_CSE_ID"),
+        google_api_key = google_api_key,
+        google_cse_id = google_cse_id,
         k=10
     )
     # Instantiate a datetime object for datetime functionality
@@ -61,7 +76,7 @@ def setup_agent(chatbot_name, memory):
 
     # Instantiate a ChatOpenAI object for language model interaction
     llm = ChatGoogleGenerativeAI(model="gemini-pro",
-                                google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
+                                google_api_key=google_genai_api_key,
                                 temperature=0.1)
 
     # Set up the LLMChain using the ChatOpenAI object and prompt template

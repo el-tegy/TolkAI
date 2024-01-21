@@ -2,7 +2,7 @@ import requests
 import concurrent.futures
 from vertexai.preview.generative_models import GenerativeModel
 
-PROJECT_ID = 'ping38'
+PROJECT_ID = 'just-lore-408910'
 params = {
     "cx": "b3cc7e87732c140e9",
     "key": "AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",

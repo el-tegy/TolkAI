@@ -17,6 +17,7 @@ from agent.codey import code_generation
 load_dotenv()
 # Load configuration from config.yml
 config = load_config()
+project_id = os.getenv('GOOGLE_CLOUD_PROJECT')
 
 def setup_agent(chatbot_name, memory):
     # Instantiate a SerpAPIWrapper object for search functionality
@@ -36,15 +37,13 @@ def setup_agent(chatbot_name, memory):
         Tool(
             name="Image link from image label",
             func=image_retrieval_pipeline,
-            description="This tool returns a image link given an image label passed as a parameter. \
-                Utilize this tool to fetch links of images you need to enhance your answer, by passing it images labels \
-                such as 'Image of the 'get data' button in Power BI'."
+            description="Useful when someone asks for advice on how to accomplish a specific task in data analytics software like Power BI Desktop or Tableau, you can enhance your responses by adding links to images."
         ),
         Tool(
             name="code from query",
             func=code_generation,
-            description="This tool returns a code from a query that necessitates code generation. \
-                Utilize this tool to answer questions that ask for programs, scrips, code or algorithms."
+            description="Useful when you want to answer questions or advice realted to language of programmation, programs, scrips, code or algorithms."
+
         ),
     ]
 
@@ -60,7 +59,7 @@ def setup_agent(chatbot_name, memory):
     output_parser = CustomOutputParser()
 
     # Instantiate a ChatOpenAI object for language model interaction
-    llm = ChatGoogleGenerativeAI(model="gemini-pro",
+    llm = ChatGoogleGenerativeAI(model="gemini-pro", project="just-lore-408910",
                                 google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
                                 temperature=0.1)
 

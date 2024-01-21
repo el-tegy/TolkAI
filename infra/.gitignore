@@ -10,3 +10,5 @@ tolkai_project.targ.gz
 # GCP Credentials
 *credentials.json
 *Credentials.json
+env.j2
+venv.j2

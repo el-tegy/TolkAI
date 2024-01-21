@@ -3,7 +3,7 @@ version: '3.8'
 services:
   chatbot:
     build: .
-    container_name: tolkai
+    container_name: streamlit_container
     ports:
       - "8501:8501"
     environment:

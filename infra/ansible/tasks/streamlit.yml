@@ -65,13 +65,13 @@
         group: streamlitadmin
       become: true
     
-    - name: Check if .env file exists
-      command: ls -la /home/streamlitadmin/tolkai_project/
-      register: ls_output
+    # - name: Check if .env file exists
+    #   command: ls -la /home/streamlitadmin/tolkai_project/
+    #   register: ls_output
 
-    - name: Show ls output
-      debug:
-        var: ls_output.stdout_lines
+    # - name: Show ls output
+    #   debug:
+    #     var: ls_output.stdout_lines
 
     - name: Start Streamlit with Docker Compose
       shell: >
@@ -79,11 +79,8 @@
       when: port_check.rc != 0 or streamlit_container.stdout != ""
     
     - name: Restart Streamlit Docker Container
-      command: docker restart container_name
+      command: docker restart streamlit_container
       become: true
-
-    - name: Reboot the server
-      reboot:
 
   handlers:
     - name: restart docker

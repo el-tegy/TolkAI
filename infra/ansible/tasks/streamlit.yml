@@ -77,6 +77,13 @@
       shell: >
         cd {{ remote_project_path }} && docker compose up -d
       when: port_check.rc != 0 or streamlit_container.stdout != ""
+    
+    - name: Restart Streamlit Docker Container
+      command: docker restart container_name
+      become: true
+
+    - name: Reboot the server
+      reboot:
 
   handlers:
     - name: restart docker

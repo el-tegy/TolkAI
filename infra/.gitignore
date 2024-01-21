@@ -1,0 +1,12 @@
+# Terraform files
+.terraform/
+terraform.tfstate
+terraform.tfstate.*
+
+# Ansible inventory overrides
+ansible/inventory.ini
+tolkai_project.targ.gz
+
+# GCP Credentials
+*credentials.json
+*Credentials.json

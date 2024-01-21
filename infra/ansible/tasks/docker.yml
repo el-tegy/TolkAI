@@ -49,6 +49,14 @@
         groups: 
           - "docker"
         append: yes
+    
+    - name: Add remote "streamlitadmin" user to "docker" group
+      user:
+        name: "streamlitadmin"
+        groups: 
+          - "docker"
+        append: yes
+
     - name: Start the docker service
       service:
         name: docker

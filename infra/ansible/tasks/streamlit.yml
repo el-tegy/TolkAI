@@ -1,0 +1,51 @@
+# Playbook for managing the Streamlit service
+- hosts: streamlit_cluster
+  become: true
+  vars:
+    streamlit_volume: "/home/app/data"
+    local_project_path: "/home/samuel/Bureau/Github/TolkAI"
+    remote_project_path: "/tolkai_project/"
+
+  tasks:
+    - name: Check for existing Streamlit container
+      command: docker ps -a -q -f name=streamlit
+      register: streamlit_container
+      failed_when: streamlit_container.rc != 0
+      # This task checks if a Docker container named 'streamlit' is already running.
+
+    - name: Stop existing Streamlit container
+      command: docker stop streamlit
+      when: streamlit_container.stdout != ""
+      # Stops the running Streamlit container if it exists.
+
+    - name: Remove existing Streamlit container
+      command: docker rm streamlit
+      when: streamlit_container.stdout != ""
+      # Removes the Streamlit container to allow for a fresh start.
+
+    - name: Check if port 8501 is in use
+      shell: netstat -tuln | grep -E ':8501'
+      register: port_check
+      failed_when: port_check.rc == 0
+      ignore_errors: true
+      # Checks if port 8501 is currently in use.
+
+    - name: Fail if port 8501 is in use by another process
+      fail:
+        msg: "Port 8501 is already in use by another process"
+      when: port_check.rc == 0 and streamlit_container.stdout == ""
+      # Fails the playbook if port 8501 is in use and the Streamlit container isn't the reason.
+
+
+    - name: Start Streamlit with Docker Compose
+      shell: >
+        cd {{ remote_project_path }} && docker compose up -d
+      when: port_check.rc != 0 or streamlit_container.stdout != ""
+      # Starts the Streamlit service using Docker Compose.
+  
+  handlers:
+    - name: restart docker
+      service: 
+        name: docker 
+        state: restarted
+

@@ -1,0 +1,13 @@
+{
+    "yaml.schemas": {},
+    "yaml.validate": false,
+    "[yaml]": {
+        "editor.quickSuggestions": {
+            "other": false,
+            "comments": false,
+            "strings": false
+        },
+        "editor.suggestOnTriggerCharacters": false,
+        "editor.acceptSuggestionOnEnter": "off"
+    }
+}

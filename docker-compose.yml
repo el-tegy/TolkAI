@@ -12,7 +12,8 @@ services:
       - GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/FILE_NAME.json
     volumes:
       - app_volume:/home/app/data
-      - ~/.config/gcloud/application_default_credentials.json:/tmp/keys/FILE_NAME.json:ro
+      # - ~/.config/gcloud/application_default_credentials.json:/tmp/keys/FILE_NAME.json:ro # for local container
+      - /home/streamlitadmin/tolkai_project/credentials.json:/tmp/keys/FILE_NAME.json:ro
     env_file:
       - ./.env
     restart: always

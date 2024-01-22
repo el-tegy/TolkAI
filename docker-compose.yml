@@ -13,6 +13,8 @@ services:
     volumes:
       - app_volume:/home/app/data
       - ~/.config/gcloud/application_default_credentials.json:/tmp/keys/FILE_NAME.json:ro
+    env_file:
+      - ./.env
     restart: always
 
 volumes:

@@ -57,7 +57,13 @@
       template:
         src: /home/samuel/Bureau/Github/TolkAI/.env
         dest: "/home/streamlitadmin/tolkai_project/.env"
-
+    
+    - name: Copy GCP service account JSON key to VM
+      copy:
+        src: /home/samuel/Bureau/Github/TolkAI/infra/terraform/environments/credentials.json
+        dest: /home/streamlitadmin/tolkai_project/credentials.json
+        mode: '0400'
+    
     - name: Change ownership of the .env file
       file:
         path: "/home/streamlitadmin/tolkai_project/.env"

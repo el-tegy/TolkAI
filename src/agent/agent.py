@@ -59,8 +59,8 @@ def setup_agent(chatbot_name, memory):
     output_parser = CustomOutputParser()
 
     # Instantiate a ChatOpenAI object for language model interaction
-    llm = ChatGoogleGenerativeAI(model="gemini-pro", project="just-lore-408910",
-                                google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
+    llm = ChatGoogleGenerativeAI(model="gemini-pro",
+                                google_api_key=os.getenv("Google_API_Key"), 
                                 temperature=0.1)
 
     # Set up the LLMChain using the ChatOpenAI object and prompt template

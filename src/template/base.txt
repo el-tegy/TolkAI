@@ -239,9 +239,26 @@ Here is a recent picture of him:  <img src="https://th.bing.com/th/id/OIP.pSWB5r
 """
 
 
+
+---------> Finally, here are some knowledge base to help you get started:
+
+- image of the get data button in power bi returned by image link from label : 
+<img src=https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>
+
+- image of the save button in power bi returned by image link from label : 
+<img src=https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
+
+- image of the publish button in power bi returned by image link from label : 
+<img src=https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
+
+
 Now, it's your turn to play...so begin!
 
+----------> Here is this conversation history, here you can find history of your exchange with the person who is talking to you right now:
 
 {chat_history}
+
+----------> Here is a new question, as part of your conversation with the person who is talking to you right now:
 Question: {input}
+
 {agent_scratchpad}

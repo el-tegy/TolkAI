@@ -15,12 +15,18 @@ from pathlib import Path
 from utils.config import load_config
 from agent.image_retrieval_gemini import image_retrieval_pipeline
 from codey import code_generation
-
+from langchain.callbacks.manager import (
+    AsyncCallbackManager,
+    AsyncCallbackManagerForChainRun,
+    CallbackManager,
+    CallbackManagerForChainRun,
+    Callbacks,
+)
 load_dotenv()
 # Load configuration from config.yml
 config = load_config()
 
-def setup_agent(chatbot_name, memory):
+def setup_agent(chatbot_name, memory, callbacks):
     # Instantiate a SerpAPIWrapper object for search functionality
     search = GoogleSearchAPIWrapper(
         google_api_key = os.getenv("Google_API_Key"),
@@ -33,20 +39,35 @@ def setup_agent(chatbot_name, memory):
         #    name="Search",
         #    func=search.run,
         #    description="The Search tool uses Google Search API to conduct Google searches. It retrieves raw search results without any inherent interpretation. \
-        #    Utilize this tool only and only when you need to fetch new information on the Internet that you don't know already."
+        #    Utilize this tool only and only when you need to fetch new information on the Internet that you don't know already. \
+        #               useful for answering greetings "
+
         # ),
+
+        #Tool(
+        #    name="Image link from image label",
+        #    func=image_retrieval_pipeline,
+        #    description="This tool returns a image link given an image label passed as a parameter. \
+        #        Utilize this tool to fetch links of images you need to enhance your answer, by passing it images labels \
+        #        such as 'Image of the 'get data' button in Power BI'."
+        #),
+        #Tool(
+        #   name="code from query",
+        #   func=code_generation,
+        #    description="This tool returns a code from a query that necessitates code generation. \
+        #        useful for when you need to answer questions about programs, scripts, code or algorithms."
+        #),
         Tool(
             name="Image link from image label",
             func=image_retrieval_pipeline,
-            description="This tool returns a image link given an image label passed as a parameter. \
-                Utilize this tool to fetch links of images you need to enhance your answer, by passing it images labels \
-                such as 'Image of the 'get data' button in Power BI'."
+            description="Useful when someone asks for advice on how to accomplish a specific task in data analytics software like Power BI Desktop or Tableau, you can enhance your responses by adding links to images."
         ),
         Tool(
             name="code from query",
             func=code_generation,
             description="This tool returns a code from a query that necessitates code generation. \
-                Utilize this tool to answer questions that ask for programs, scrips, code or algorithms."
+            useful when you want to answer questions or advice related to programming languages, programs, scripts, code or algorithms."
+
         ),
     ]
 
@@ -78,23 +99,33 @@ def setup_agent(chatbot_name, memory):
         stop=["\nObservation:"],
         allowed_tools=tool_names
     )
-
+    #print(f"prompt {prompt}")
     # Create an AgentExecutor from the agent and tools with verbose output
-    agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True, memory=memory)
+    agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True, memory=memory, callbacks=callbacks)
     return agent_executor
 
 
-def chat_with_agent(user_input: str, chatbot_name: str, memory):
+def chat_with_agent(user_input: str, chatbot_name: str, memory, callbacks):
     # Set up the agent using the setup_agent() function
-    agent_executor = setup_agent(chatbot_name, memory)
-    # Execute the agent with the given user_input and get the response
-    response = agent_executor.run(user_input)
+    agent_executor = setup_agent(chatbot_name, memory, callbacks=callbacks)
+    # Execute the agent with the given user_input and get the responses
+    response = agent_executor.run(user_input, callbacks=callbacks)
     # If the response is a dictionary, return the 'output' value, otherwise, return the response itself
     if isinstance(response, dict):
         return response.get("output")
     else:
         return response
 
+def chat_with_agent2(user_input: str, chatbot_name: str, memory,  texte: str):
+    # Set up the agent using the setup_agent() function
+    agent_executor = setup_agent(chatbot_name, memory)
+    # Execute the agent with the given user_input and get the responses
+    response = agent_executor.run(user_input)
+    # If the response is a dictionary, return the 'output' value, otherwise, return the response itself
+    if isinstance(response, dict):
+        return response.get("output")
+    else:
+        return response
 
 """if __name__:
     # Load environment variables from .env file

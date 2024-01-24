@@ -257,10 +257,10 @@ of our discussion with him to recall the context and answer accordingly.
 Now, it's your turn to play...so begin!
 
 ----------> Here is this conversation history, here you can find history of your exchange with the person who is talking to you right now:
-
+History of this conversation:
 {chat_history}
 
 ----------> Here is a new question, as part of your conversation with the person who is talking to you right now:
-Question: {input}
+New question as part of this conversation: {input}
 
 {agent_scratchpad}

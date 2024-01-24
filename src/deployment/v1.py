@@ -23,7 +23,7 @@ memory = ConversationBufferMemory(memory_key="chat_history", chat_memory=msgs)
 reset_history = st.sidebar.button("Reset chat history")
 if len(msgs.messages) == 0 or reset_history:
     msgs.clear()
-    msgs.add_ai_message("Hello my name is TalkAI. How can I help you?")
+    msgs.add_ai_message("Hello my name is TolkAI. How can I help you?")
     st.session_state["last_run"] = None
 
 

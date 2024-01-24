@@ -28,28 +28,30 @@ def setup_agent(chatbot_name, memory):
     )
     # Instantiate a datetime object for datetime functionality
     tools = [
-        # Tool(
-        #    name="Search",
-        #    func=search.run,
-        #    description="The Search tool uses Google Search API to conduct Google searches. It retrieves raw search results without any inherent interpretation. \
-        #    Utilize this tool only and only when you need to fetch new information on the Internet that you don't know already."
-        # ),
+        #Tool(
+         #   name="Search",
+          #  func=search.run,
+           #description="Useful when you want to respond to user requests that are related to current events,actuallity, real-time information"
+        #),
         Tool(
             name="Image link from image label",
-            func=image_retrieval_pipeline,
-            description="Useful when someone asks for advice on how to accomplish a specific task in data analytics software like Power BI Desktop or Tableau, you can enhance your responses by adding links to images."
+           func=image_retrieval_pipeline,
+            description="Useful when someone asks an image or  advice on how to accomplish a specific task in data analytics software like Power BI Desktop or Tableau, you can enhance your responses by adding links to images\
+                we can also provide an image of an object"
         ),
         Tool(
-            name="code from query",
+           name="code from query",
+          #  name="General query",
             func=code_generation,
-            description="Useful when you want to answer questions or advice realted to language of programmation, programs, scrips, code or algorithms."
-
+            description="Useful when you want to answer questions or advice related to language of programmation, programs, scrips, code or algorithms."
+            #description="Useful when you want to respond to user requests that aren't related to current events or specific tasks in data analytics software.\
+             #     The input need to be the original request of the user"
         ),
     ]
 
     # Set up the prompt template using the base.txt file and the tools list
     prompt = CustomPromptTemplate(
-        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base_ongolo.txt")).replace(
+        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base.txt")).replace(
             "{chatbot_name}", chatbot_name),
         tools=tools,
         input_variables=["input", "intermediate_steps", "chat_history"]

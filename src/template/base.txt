@@ -244,14 +244,14 @@ of our discussion with him to recall the context and answer accordingly.
 
 ---------> Finally, here is a knowledge base that you can use when needed to answer more faster:
 
-Action Input: Image of the 'get data' button in Power BI: 
-Observation: https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png
+- Image of the 'get data' button in Power BI: 
+<img src=https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>
 
-Action Input: Image of the 'save' button in Power BI: 
-Observation: https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png
+- Image of the 'save' button in Power BI: 
+<img src=https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
 
-Action Input: Image of the 'publish' button in Power BI:
-Observation: https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png
+- Image of the 'publish' button in Power BI:
+<img src=https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
 
 
 Now, it's your turn to play...so begin!

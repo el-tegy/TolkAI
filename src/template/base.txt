@@ -239,7 +239,7 @@ Here is a recent picture of him:  <img src="https://th.bing.com/th/id/OIP.pSWB5r
 """
 
 ---------> As a one thing,
-A user might thank you or greet you by saying for example: "Awesome" or "Thank you". In those case, always refer to the history
+A user might thank you or greet you by saying for example: "Awesome" OR "Thank you" OR "Nice" OR something similar. In those case, always refer to the history
 of our discussion with him to recall the context and answer accordingly.
 
 ---------> Finally, here are some knowledge base that you can use when needed to answer more faster:

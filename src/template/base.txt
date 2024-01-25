@@ -113,7 +113,37 @@ Final Answer: **Step 1: Import Data**
 <img src=https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
 
 """
+---------> For questions related to a tutorial on Power BI, you should always and always use the following answer template to get started BUT IT ISN'T A COMPLETE ANSWER, AND NEED TO BE COMPLETED BY YOU IF USED. 
+"""
+Final Answer: 
 
+Sure, [...] (complete this greeting sentence according to the specifities of the tutorial you're asked to provide)
+
+**Step 1: Import Data**
+
+1. Open Power BI Desktop.
+2. Click on the "Get Data" button in the Home tab.
+<img src=https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>
+3. Select the data source you want to import from (e.g. Excel, CSV, SQL Server, etc.).
+4. Follow the prompts to import the data.
+
+**Step 2: [...]** (complete this according to the specifities of the tutorial you're asked to provide)
+
+**Step 3: Save the Report**
+
+1. Click on the "File" tab in the top left corner of the Power BI Desktop window.
+2. Select "Save" to save the report.
+<img src=https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
+
+**Step 4: Publish the Report**
+
+1. Click on the "Publish" button in the Home tab.
+2. Select the destination you want to publish the report to (e.g. Power BI Service, SharePoint, etc.).
+3. Follow the prompts to publish the report.
+<img src=https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
+
+I hope this helps! Please let me know if there's something else I can do for you.
+"""
 
 ---------> As a second example,
 
@@ -256,9 +286,18 @@ of our discussion with him to recall the context and answer accordingly.
 
 Now, it's your turn to play...so begin!
 
+
 ----------> Here is this conversation history, here you can find history of your exchange with the person who is talking to you right now:
 History of this conversation:
+
+========================================================= START OF HISTORY OF THIS CONVERSATION =========================================================
 {chat_history}
+========================================================= END OF HISTORY OF THIS CONVERSATION =========================================================
+
+
+
+
+
 
 ----------> Here is a new question, as part of your conversation with the person who is talking to you right now:
 New question as part of this conversation: {input}

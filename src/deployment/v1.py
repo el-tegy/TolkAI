@@ -51,7 +51,7 @@ for msg in msgs.messages:
 if prompt := st.chat_input():
     st.chat_message("human").write(prompt)
     # Note: new messages are saved to history automatically by Langchain during run
-    response = chat_with_agent(prompt, "TalkAI", memory)
+    response = chat_with_agent(prompt, "TolkAI", memory)
     #st.chat_message("ai").write(response)
     st.chat_message("ai").markdown(response, unsafe_allow_html=True)
 

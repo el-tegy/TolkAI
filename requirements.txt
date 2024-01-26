@@ -1,6 +1,7 @@
 langchain
 langchain_community==0.0.4
 google-cloud-aiplatform
+langchain_openai
 langchain-google-genai
 python-dotenv==1.0.0
 google-api-python-client==2.100.0

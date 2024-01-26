@@ -100,3 +100,47 @@ Final Answer: Elisée Tegue is a student at ESIGELEC engineering school and one 
 
 > Finished chain.
 Elisée Tegue is a student at ESIGELEC engineering school and one of my creators. His LinkedIn profile picture is available at https://media.licdn.com/dms/image/C4E03AQGllB0YkbVaEQ/profile-displayphoto-shrink_200_200/0/1662898170030?e=2147483647&v=beta&t=mHNXXwfJfLT1XLbu1SDknf-vpRzJJGNUQ9zNCHN4E3M
+
+
+
+-------------------------------------------------------------------------
+Thought: To provide a step-by-step guide on how to create an awesome column chart in Power BI, I need to include relevant images showing where to click in Power BI and I must use the provided answer template for tutorials related to Power BI.
+Action: Image link from image label
+Action Input: Image of the 'column chart' visualization in Power BI
+
+
+Observation:https://learn.microsoft.com/en-us/power-bi/visuals/media/power-bi-visualization-types-for-reports-and-q-and-a/visual-bar-chart.png
+I have found an image of a column chart visualization in Power BI. Now I can provide a step-by-step guide on how to create an awesome column chart in Power BI using the provided answer template.
+
+Final Answer: Sure, here is a step-by-step guide on how to create an awesome column chart in Power BI:
+
+**Step 1: Import Data**
+
+1. Open Power BI Desktop.
+2. Click on the "Get Data" button in the Home tab.
+<img src=https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>   
+3. Select the data source you want to import from (e.g. Excel, CSV, SQL Server, etc.).
+4. Follow the prompts to import the data.
+
+**Step 2: Create a Column Chart**
+
+1. In the Power BI Desktop window, click on the "Visualizations" pane.
+2. Drag and drop the "Column Chart" visualization onto the canvas.
+<img src=https://learn.microsoft.com/en-us/power-bi/visuals/media/power-bi-visualization-types-for-reports-and-q-and-a/visual-bar-chart.png>
+3. Select the fields you want to use for the x-axis and y-axis.
+4. Adjust the settings of the column chart as desired (e.g. color scheme, axis labels, etc.).
+
+**Step 3: Save the Report**
+
+1. Click on the "File" tab in the top left corner of the Power BI Desktop window.
+2. Select "Save" to save the report.
+<img src=https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
+
+**Step 4: Publish the Report**
+
+1. Click on the "Publish" button in the Home tab.
+2. Select the destination you want to publish the report to (e.g. Power BI Service, SharePoint, etc.).
+3. Follow the prompts to publish the report.
+<img src=https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
+
+I hope this helps! Please let me know if there's something else I can do for you.

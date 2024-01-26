@@ -20,7 +20,43 @@ Observation: the result of the action
 Thought: I now know the final answer
 Final Answer: the final answer to the original input question.
 
+
+
+---------> For questions related to a tutorial on Power BI, you should always and always use the following answer template to get started BUT IT ISN'T A COMPLETE ANSWER, AND NEED TO BE COMPLETED BY YOU IF USED. 
+
+========================================================= START OF ANSWER TEMPLATE =========================================================
+
+Sure, [...] (complete this greeting sentence)
+
+**Step 1: Import Data**
+
+1. Open Power BI Desktop.
+2. Click on the "Get Data" button in the Home tab.
+<img src=https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>
+3. Select the data source you want to import from (e.g. Excel, CSV, SQL Server, etc.).
+4. Follow the prompts to import the data.
+
+**Step 2: [...]** (complete this step)
+
+**Step 3: Save the Report**
+
+1. Click on the "File" tab in the top left corner of the Power BI Desktop window.
+2. Select "Save" to save the report.
+<img src=https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
+
+**Step 4: Publish the Report**
+
+1. Click on the "Publish" button in the Home tab.
+2. Select the destination you want to publish the report to (e.g. Power BI Service, SharePoint, etc.).
+3. Follow the prompts to publish the report.
+<img src=https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
+
+I hope this helps! Please let me know if there's something else I can do for you.
+
+========================================================= END OF ANSWER TEMPLATE =========================================================
+
 These were previous tasks you completed:
+
 
 ---------> As a first example,
 
@@ -32,28 +68,17 @@ which should contain relevant images showing the user where to click in Power BI
 - Here is how you should typically reason to get to a perfect answer to that query:
 
 """
-Thought: To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
-Action: Image link from image label
-Action Input: Image of the 'get data' button in Power BI
-
-Observation:https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png
-To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
+Thought: To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI
+and I must use the provided answer template for tutorials related to Power BI.
 Action: Image link from image label
 Action Input: Image of the 'heatmap' visualization in Power BI
 
 Observation:https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg
-To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
-Action: Image link from image label
-Action Input: Image of the 'save' button in Power BI
+I have found an image of a heatmap visualization in Power BI. Now I can provide a step-by-step guide on how to create a heatmap in Power BI using the provided answer template.
 
-Observation:https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png
-To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
-Action: Image link from image label
-Action Input: Image of the 'publish' button in Power BI
+Final Answer: Sure, here is a step-by-step guide on how to create a heatmap in Power BI:
 
-Observation:https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png
-I now know the final answer
-Final Answer: **Step 1: Import Data**
+**Step 1: Import Data**
 
 1. Open Power BI Desktop.
 2. Click on the "Get Data" button in the Home tab.
@@ -81,8 +106,11 @@ Final Answer: **Step 1: Import Data**
 2. Select the destination you want to publish the report to (e.g. Power BI Service, SharePoint, etc.).
 3. Follow the prompts to publish the report.
 <img src=https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
+I hope this helps! Please let me know if there's something else I can do for you.
 
 > Finished chain.
+Sure, here is a step-by-step guide on how to create a heatmap in Power BI:
+
 **Step 1: Import Data**
 
 1. Open Power BI Desktop.
@@ -98,36 +126,6 @@ Final Answer: **Step 1: Import Data**
 <img src=https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg>
 3. Select the fields you want to use for the x-axis, y-axis, and value.
 4. Adjust the settings of the heatmap as desired (e.g. color scheme, legend, etc.).
-
-**Step 3: Save the Report**
-
-1. Click on the "File" tab in the top left corner of the Power BI Desktop window.
-2. Select "Save" to save the report.
-<img src=https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png>
-
-**Step 4: Publish the Report**
-
-1. Click on the "Publish" button in the Home tab.
-2. Select the destination you want to publish the report to (e.g. Power BI Service, SharePoint, etc.).
-3. Follow the prompts to publish the report.
-<img src=https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png>
-
-"""
----------> For questions related to a tutorial on Power BI, you should always and always use the following answer template to get started BUT IT ISN'T A COMPLETE ANSWER, AND NEED TO BE COMPLETED BY YOU IF USED. 
-"""
-Final Answer: 
-
-Sure, [...] (complete this greeting sentence according to the specifities of the tutorial you're asked to provide)
-
-**Step 1: Import Data**
-
-1. Open Power BI Desktop.
-2. Click on the "Get Data" button in the Home tab.
-<img src=https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png>
-3. Select the data source you want to import from (e.g. Excel, CSV, SQL Server, etc.).
-4. Follow the prompts to import the data.
-
-**Step 2: [...]** (complete this according to the specifities of the tutorial you're asked to provide)
 
 **Step 3: Save the Report**
 
@@ -144,6 +142,8 @@ Sure, [...] (complete this greeting sentence according to the specifities of the
 
 I hope this helps! Please let me know if there's something else I can do for you.
 """
+
+
 
 ---------> As a second example,
 

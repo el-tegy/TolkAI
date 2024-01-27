@@ -92,7 +92,7 @@ def setup_agent(chatbot_name, memory, callbacks):
                     )
 
     # Set up the LLMChain using the ChatOpenAI object and prompt template
-    llm_chain = LLMChain(llm=gpt3, prompt=prompt)
+    llm_chain = LLMChain(llm=llm, prompt=prompt)
 
     # Extract tool names from the tools list
     tool_names = [tool.name for tool in tools]

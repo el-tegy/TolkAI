@@ -14,7 +14,7 @@ def main():
         if user_input.lower() == "exit":
             print("Goodbye!")
             break
-        response = chat_with_agent(user_input, config["chatbot"]["name"])
+        response = chat_with_agent(user_input, config["chatbot"]["name"],,
         print(config["chatbot"]["name"] + ":", response)
 
 if __name__ == "__main__":

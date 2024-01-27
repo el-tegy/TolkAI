@@ -7,3 +7,4 @@ google-api-python-client==2.100.0
 google_search_results==2.4.2
 pytest==7.3.1
 pyarrow==0.15.1
+streamlit

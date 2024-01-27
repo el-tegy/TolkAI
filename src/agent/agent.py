@@ -14,6 +14,7 @@ from datetime import datetime
 from pathlib import Path
 from utils.config import load_config
 from agent.image_retrieval_gemini import image_retrieval_pipeline
+from agent.image_retrieval_gemini import multiple_query_image_retrieval
 from codey import code_generation
 from langchain.callbacks.manager import (
     AsyncCallbackManager,
@@ -57,9 +58,14 @@ def setup_agent(chatbot_name, memory, callbacks):
         #    description="This tool returns a code from a query that necessitates code generation. \
         #        useful for when you need to answer questions about programs, scripts, code or algorithms."
         #),
+        #Tool(
+        #    name="Image link from image label",
+        #    func=image_retrieval_pipeline,
+        #    description="Useful when someone asks for advice on how to accomplish a specific task in data analytics software like Power BI Desktop or Tableau, you can enhance your responses by adding links to images."
+        #),
         Tool(
-            name="Image link from image label",
-            func=image_retrieval_pipeline,
+            name="Images links from images labels",
+            func=multiple_query_image_retrieval,
             description="Useful when someone asks for advice on how to accomplish a specific task in data analytics software like Power BI Desktop or Tableau, you can enhance your responses by adding links to images."
         ),
         Tool(
@@ -92,6 +98,7 @@ def setup_agent(chatbot_name, memory, callbacks):
 
     # Extract tool names from the tools list
     tool_names = [tool.name for tool in tools]
+
     # Set up the LLMSingleActionAgent with LLMChain, output parser, and allowed tools
     agent = LLMSingleActionAgent(
         llm_chain=llm_chain,

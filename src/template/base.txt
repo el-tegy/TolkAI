@@ -16,7 +16,6 @@ Thought: you should always think about what to do
 Action: the action to take, should be one of [{tool_names}]
 Action Input: the input to the action
 Observation: the result of the action
-... (this Thought/Action/Action Input/Observation can repeat N times)
 Thought: I now know the final answer
 Final Answer: the final answer to the original input question.
 
@@ -33,27 +32,9 @@ which should contain relevant images showing the user where to click in Power BI
 
 """
 Thought: To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
-Action: Image link from image label
-Action Input: Image of the 'get data' button in Power BI
-
-Observation:https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png
-To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
-Action: Image link from image label
-Action Input: Image of the 'heatmap' visualization in Power BI
-
-Observation:https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg
-To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
-Action: Image link from image label
-Action Input: Image of the 'save' button in Power BI
-
-Observation:https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png
-To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
-Action: Image link from image label
-Action Input: Image of the 'publish' button in Power BI
-
-Observation:https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png
-I now know the final answer
-
+Action: Images links from images labels
+Action Input: Image of the 'get data' button in Power BI;Image of the 'heatmap' visualization in Power BI;Image of the 'save' button in Power BI;Image of the 'publish' button in Power BI
+Observation:['https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png', 'https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg', 'https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png', 'https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png']
 > Finished chain.
 
 **Step 1: Import Data**

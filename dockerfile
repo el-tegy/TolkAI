@@ -17,13 +17,14 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/bin/python3 /usr/bin/python && \
     pip install --trusted-host pypi.org torch && \
-    pip install --no-cache-dir --upgrade pip setuptools
-
-# Install the requirements
-RUN pip install --trusted-host pypi.org -r requirements.txt
+    pip install --no-cache-dir --upgrade pip setuptools && \
+    pip install --trusted-host pypi.org -r requirements.txt
 
 # Copy the current directory contents into the container at /app
 COPY . .
 
-# Start a bash shell and source the CHATBOT_NAME value from /etc/bash.bashrc
-CMD ["/bin/bash", "-c", "source /etc/bash.bashrc; trap : TERM INT; sleep infinity & wait"]
+# Expose the default Streamlit port
+EXPOSE 8501
+
+# Start Streamlit
+CMD ["streamlit", "run", "./src/streamlit_deployment/v0.py"]

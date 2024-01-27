@@ -1,6 +1,7 @@
 import streamlit as st
 
 import sys
+from pathlib import Path
 import os
 # Add the src directory to sys.path to allow for absolute imports
 root_dir = Path(__file__).resolve().parents[1]

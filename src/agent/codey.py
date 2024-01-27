@@ -24,3 +24,4 @@ def code_generation(query):
 
     # Extract and return the text content from the generated response
     return model_response.candidates[0].content.parts[0].text
+

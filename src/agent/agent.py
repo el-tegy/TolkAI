@@ -14,12 +14,15 @@ from pathlib import Path
 from utils.config import load_config 
 from agent.image_retrieval import image_retrieval_pipeline
 from agent.codey import code_generation
-
+from langchain_openai import ChatOpenAI
 load_dotenv()
 # Load configuration from config.yml
 config = load_config()
 
-def setup_agent(chatbot_name, memory):
+google_api_key = os.getenv("Google_API_Key")
+google_cse_id = os.getenv("Google_CSE_ID")
+openai_api_key = os.getenv("OPENAI_API_KEY")
+def setup_agent(chatbot_name, memory,callbacks):
     # Instantiate a SerpAPIWrapper object for search functionality
     search = GoogleSearchAPIWrapper(
         google_api_key = os.getenv("Google_API_Key"),
@@ -34,7 +37,7 @@ def setup_agent(chatbot_name, memory):
            #description="Useful when you want to respond to user requests that are related to current events,actuallity, real-time information"
         #),
         Tool(
-            name="Image link from image label",
+            name="Images links from images labels",
            func=image_retrieval_pipeline,
             description="Useful when someone asks an image or  advice on how to accomplish a specific task in data analytics software like Power BI Desktop or Tableau, you can enhance your responses by adding links to images\
                 we can also provide an image of an object"
@@ -51,7 +54,7 @@ def setup_agent(chatbot_name, memory):
 
     # Set up the prompt template using the base.txt file and the tools list
     prompt = CustomPromptTemplate(
-        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base.txt")).replace(
+        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base_.txt")).replace(
             "{chatbot_name}", chatbot_name),
         tools=tools,
         input_variables=["input", "intermediate_steps", "chat_history"]
@@ -62,9 +65,12 @@ def setup_agent(chatbot_name, memory):
 
     # Instantiate a ChatOpenAI object for language model interaction
     llm = ChatGoogleGenerativeAI(model="gemini-pro",
-                                google_api_key="AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
+                                google_api_key= google_api_key,
                                 temperature=0.1)
 
+    gpt3 = ChatOpenAI(model="gpt-3.5-turbo-16k-0613", 
+                    openai_api_key = openai_api_key  
+                    )
     # Set up the LLMChain using the ChatOpenAI object and prompt template
     llm_chain = LLMChain(llm=llm, prompt=prompt)
 
@@ -79,15 +85,15 @@ def setup_agent(chatbot_name, memory):
     )
 
     # Create an AgentExecutor from the agent and tools with verbose output
-    agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True, memory=memory)
+    agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True, memory=memory,callbacks=callbacks)
     return agent_executor
 
 
-def chat_with_agent(user_input: str, chatbot_name: str, memory):
+def chat_with_agent(user_input: str, chatbot_name: str, memory, callbacks):
     # Set up the agent using the setup_agent() function
-    agent_executor = setup_agent(chatbot_name, memory)
-    # Execute the agent with the given user_input and get the response
-    response = agent_executor.run(user_input)
+    agent_executor = setup_agent(chatbot_name, memory, callbacks=callbacks)
+    # Execute the agent with the given user_input and get the responses
+    response = agent_executor.run(user_input, callbacks=callbacks)
     # If the response is a dictionary, return the 'output' value, otherwise, return the response itself
     if isinstance(response, dict):
         return response.get("output")

@@ -14,7 +14,7 @@ from langchain.agents import AgentExecutor, LLMSingleActionAgent
 from langchain import SerpAPIWrapper, LLMChain
 from langchain.chat_models import ChatOpenAI
 
-from src.agent.agent import setup_agent, chat_with_agent
+from agent import setup_agent, chat_with_agent
 from src.template.template import CustomPromptTemplate, read_template
 from src.parser.parser import CustomOutputParser
 import src.utils.config as cfg

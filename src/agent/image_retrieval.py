@@ -1,6 +1,7 @@
 import requests
 import concurrent.futures
 from vertexai.preview.generative_models import GenerativeModel
+import difflib
 
 PROJECT_ID = 'ping38'
 params = {
@@ -77,13 +78,48 @@ def generate(formatted_prompt):
     )
     return " ".join([response.candidates[0].content.parts[0].text for response in responses])
 
-def image_retrieval_pipeline(query):
+
+dictionnaire = {
+    "Image of the get data button in Power BI": "https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png",
+    "Image of the save button in Power BI   ": "https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png",
+    "Image of the publish button in Power BI" : "https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png",
+    "Image of duplicate column option in Power Query" : "https://www.myexcelonline.com/wp-content/uploads/2017/10/Duplicate-Columns-03.png",
+    "Image of filter button in Power Query" : "https://excelunlocked.com/wp-content/uploads/2020/10/Text-Filters-in-Power-Query-Editor.png",
+    "Image of the pie chart visualization in Power BI" : "https://cdn.educba.com/academy/wp-content/uploads/2020/02/Power-BI-Pie.png",
+    "Image of the 'Relationships' view in Power BI":"https://learn.microsoft.com/en-us/power-bi/transform-model/media/desktop-relationship-view/model-view-03.png",
+    "Image of the 'New Relationship' dialog box in Power BI":"https://learn.microsoft.com/en-us/power-bi/transform-model/media/desktop-create-and-manage-relationships/candmrel_create_compproj.png"
+    
+    }
+
+def trouver_correspondance(query, dictionnaire):
+    # Liste des clés du dictionnaire
+    cles = list(dictionnaire.keys())
+
+    # Utilisation de la bibliothèque difflib pour trouver la correspondance la plus proche
+    correspondance = difflib.get_close_matches(query, cles, n=1, cutoff=0.8)
+
+    # Vérifier si une correspondance a été trouvée
+    if correspondance:
+        # Renvoyer la valeur correspondante dans le dictionnaire
+        return dictionnaire[correspondance[0]]
+    else:
+        return None
+
+def image_retrieval_pipeline(query_list):
     url = "https://www.googleapis.com/customsearch/v1"
-    total_images = 20 # Total number of images to download
-    images_per_request = 10  # Maximum number of images per request
-    query = query.replace("button", "")
-    image_urls = image_search(query=query, total_images=total_images, images_per_request=images_per_request, url=url)
-    formatted_prompt = format_for_generate(image_urls, query)
-    response = generate(formatted_prompt)
-    most_relevant_image = response[2:-2].replace(" ", "")
-    return most_relevant_image
+    total_images = 30 # Total number of images to download
+    images_per_request = 5  # Maximum number of images per request
+    list_most_relevant=[]
+    query_list = query_list.split(";")
+    for query in query_list :
+        most_relevant_image=trouver_correspondance(query, dictionnaire)
+        if most_relevant_image is not None:
+            list_most_relevant.append(most_relevant_image)
+        else: 
+            query = query.replace("button", "")
+            image_urls = image_search(query=query, total_images=total_images, images_per_request=images_per_request, url=url)
+            formatted_prompt = format_for_generate(image_urls, query)
+            response = generate(formatted_prompt)
+            most_relevant_image = response[2:-2].replace(" ", "")
+            list_most_relevant.append(most_relevant_image)
+    return list_most_relevant 

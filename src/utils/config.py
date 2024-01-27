@@ -23,5 +23,5 @@ def setup_environment_variables(config):
     #if openai_api_key is not None:
     #    os.environ['OPENAI_API_KEY'] = openai_api_key
 
-    if serpapi_api_key is not None:
-        os.environ['SERPAPI_API_KEY'] = serpapi_api_key
+   # if serpapi_api_key is not None:
+   #     os.environ['SERPAPI_API_KEY'] = serpapi_api_key

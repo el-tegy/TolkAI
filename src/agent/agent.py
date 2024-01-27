@@ -19,6 +19,7 @@ from datetime import datetime
 from pathlib import Path
 from utils.config import load_config
 from agent.image_retrieval import image_retrieval_pipeline
+from agent.image_retrieval import multiple_query_image_retrieval
 from agent.codey import code_generation
 from langchain_openai import ChatOpenAI
 import google.generativeai as genai
@@ -58,11 +59,9 @@ def setup_agent(chatbot_name, memory, callbacks):
         #    Utilize this tool only and only when you need to fetch new information on the Internet that you don't know already."
         # ),
         Tool(
-            name="Image link from image label",
-            func=image_retrieval_pipeline,
-            description="This tool returns a image link given an image label passed as a parameter. \
-                Utilize this tool to fetch links of images you need to enhance your answer, by passing it images labels \
-                such as 'Image of the 'get data' button in Power BI'."
+            name="Images links from images labels",
+            func=multiple_query_image_retrieval,
+            description="Useful when someone asks for advice on how to accomplish a specific task in data analytics software like Power BI Desktop or Tableau, you can enhance your responses by adding links to images."
         ),
         Tool(
             name="code from query",

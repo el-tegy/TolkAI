@@ -2,7 +2,9 @@ import streamlit as st
 
 import sys
 
-sys.path.append('C:/Users/user/ping3/TolkAI/src')
+# Add the src directory to sys.path to allow for absolute imports
+root_dir = Path(__file__).resolve().parents[1]
+sys.path.append(str(root_dir))
 from agent.agent import chat_with_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory

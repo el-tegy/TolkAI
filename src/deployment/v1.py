@@ -1,19 +1,31 @@
 import streamlit as st
+
 import sys
-
-
-
-
+from pathlib import Path
+import os
+# Add the src directory to sys.path to allow for absolute imports
+root_dir = Path(__file__).resolve().parents[1]
+sys.path.append(str(root_dir))
 from agent.agent import chat_with_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory
-from langchain.callbacks import StreamlitCallbackHandler
+from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
+import streamlit as st
+from google.oauth2 import service_account
+import googleapiclient.discovery
+import google.auth
+import vertexai
+from google.cloud import aiplatform
 
+vertexai.init(project="ping38", location="us-west4")
 
+# Retrieve the JSON key file path from Streamlit Secrets
+key_path = st.secrets["service_account"]
 
+# Authenticate using the key file
+credentials, project_id = google.auth.default()
 
-st.set_page_config(page_title="TolkAI", layout="wide", initial_sidebar_state="collapsed")
-
+st.set_page_config(page_title="TolkAI")
 st.title('TolkAI')
 
 

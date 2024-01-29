@@ -1,27 +1,25 @@
-from langchain.chat_models import ChatVertexAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import ChatPromptTemplate
-import vertexai
-from vertexai.preview.generative_models import GenerativeModel
+import google.generativeai as genai
+import streamlit as st
+
+# Access API key stored in Streamlit's secrets
+google_genai_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
+genai.configure(api_key=google_genai_api_key)
 def code_generation(query):
     """
     Generate a response based on the prompt using the Gemini Pro model.
 
-    Args:
-        query (str): The user's input/query.
-        
-    Returns:
-        str: The generated response by the language model.
-             (The model's response to the user's input.)
+        Args:
+            query(str) : the query that needs code generation
+
+        Returns:
+            str: the answer of the model to the query
     """
-    # Create an instance of the GenerativeModel with the Gemini Pro model
-    gemini_pro_model = GenerativeModel("gemini-pro")
+    chat = ChatGoogleGenerativeAI(model="gemini-pro",
+                            google_api_key=google_genai_api_key,
+                            temperature=0.1)
+    message = chat.invoke(query)
+    return message.content
 
-    # Generate content using the Gemini Pro model with the specified configuration
-    model_response = gemini_pro_model.generate_content(
-        query,
-        generation_config={"temperature": 0.2}
-    )
-
-    # Extract and return the text content from the generated response
-    return model_response.candidates[0].content.parts[0].text
-
+#print(code_generation("Write a Python function to identify all prime numbers"))

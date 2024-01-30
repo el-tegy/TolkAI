@@ -1,7 +1,7 @@
 
 import streamlit as st
 import sys
-sys.path.append('/Users/mnguemnin/Documents/Ping38/untitled folder/TolkAI/src')
+
 from agent.agent import chat_with_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory

@@ -56,6 +56,14 @@
         groups: 
           - "docker"
         append: yes
+    
+    # - name: Ensure Docker socket has correct ownership
+    #   ansible.builtin.file:
+    #     path: /var/run/docker.sock
+    #     owner: root
+    #     group: docker
+    #     mode: '0660'
+    #   become: true
 
     - name: Start the docker service
       service:

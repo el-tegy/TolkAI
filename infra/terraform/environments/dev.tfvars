@@ -8,7 +8,7 @@ region = "us-west4" # This one is Las Vegas, Nevada, Amérique du Nord
 credentials = "./environments/credentials.json"
 
 # Number of nodes 
-num_nodes = 2
+num_nodes = 4
 
 # Path to the public SSH key
 public_key_path = "/home/samuel/.ssh/id_rsa.pub"

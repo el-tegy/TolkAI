@@ -16,9 +16,10 @@ resource "google_compute_firewall" "streamlit_firewall_rule" {
 resource "google_compute_instance" "streamlit_node" {
   count        = var.num_nodes # the number of instances to provision
   name         = "streamlit-node-${count.index}"
-  machine_type = "e2-medium" # machine type of each node
+  machine_type = "e2-medium" # machine type of each node, for GPU machine use n2-standard-2
   zone = "us-west4-a" # The instance zone(not the region)
   tags         = ["http-server","https-server"] # Tags to connect instances to internet
+  # allow_stopping_for_update = true
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11" #OS for each VM

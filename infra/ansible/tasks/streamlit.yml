@@ -43,6 +43,14 @@
         group: streamlitadmin
         mode: '0755'
       become: true
+    
+    - name: Ensure Docker socket has correct ownership
+      ansible.builtin.file:
+        path: /var/run/docker.sock
+        owner: streamlitadmin
+        group: docker
+        mode: '0666'
+      become: true
 
     - name: Clone the Git repository
       git:

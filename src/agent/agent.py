@@ -22,6 +22,7 @@ from agent.image_retrieval import image_retrieval_pipeline
 from agent.image_retrieval import multiple_query_image_retrieval
 from agent.codey import code_generation
 from langchain_openai import ChatOpenAI
+from langchain_openai import OpenAI
 import google.generativeai as genai
 import streamlit as st
 from langchain.callbacks.manager import (
@@ -37,6 +38,7 @@ google_api_key = st.secrets["api_keys"]["GOOGLE_API_KEY"]
 google_cse_id = st.secrets["api_keys"]["GOOGLE_CSE_ID"]
 google_genai_api_key = st.secrets["api_keys"]["GOOGLE_GENAI_API_KEY"]
 openai_api_key = st.secrets["api_keys"]["OPENAI_API_KEY"]
+openai_api_key4 = st.secrets["api_keys"]["OPENAI_API_KEY4"]
 
 load_dotenv()
 # Load configuration from config.yml
@@ -73,7 +75,7 @@ def setup_agent(chatbot_name, memory, callbacks):
 
     # Set up the prompt template using the base.txt file and the tools list
     prompt = CustomPromptTemplate(
-        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "baseTeg.txt")).replace(
+        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "baseMarcel.txt")).replace(
             "{chatbot_name}", chatbot_name),
         tools=tools,
         input_variables=["input", "intermediate_steps", "chat_history"]
@@ -85,15 +87,22 @@ def setup_agent(chatbot_name, memory, callbacks):
     # Instantiate a ChatOpenAI object for language model interaction
     llm = ChatGoogleGenerativeAI(model="gemini-pro",
                                 google_api_key=google_genai_api_key,
-                                temperature=0.1)
+                                temperature=0.1
+                                ,  streaming = True)
 
     gpt3 = ChatOpenAI(model="gpt-3.5-turbo-16k-0613",
                     openai_api_key = openai_api_key
                       , temperature=0
+                      , streaming=True
                     )
-
+    gpt4 = ChatOpenAI(model="gpt-4-0125-preview",
+                        openai_api_key = openai_api_key4
+                          , temperature=0.5
+                          ,  streaming = True
+                        )
+    llmgpt = OpenAI(temperature=0, openai_api_key=openai_api_key4, streaming=True, max_tokens=8194)
     # Set up the LLMChain using the ChatOpenAI object and prompt template
-    llm_chain = LLMChain(llm=llm, prompt=prompt)
+    llm_chain = LLMChain(llm=gpt4 , prompt=prompt)
 
     # Extract tool names from the tools list
     tool_names = [tool.name for tool in tools]

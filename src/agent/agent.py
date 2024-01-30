@@ -12,6 +12,7 @@ from datetime import datetime
 from pathlib import Path
 from utils.config import load_config
 from agent.image_retrieval import image_retrieval_pipeline
+from agent.image_retrieval import multiple_query_image_retrieval
 from agent.codey import code_generation
 from langchain.callbacks.manager import (
     AsyncCallbackManager,
@@ -58,9 +59,10 @@ def setup_agent(chatbot_name, memory, callbacks):
         #    description="This tool returns a code from a query that necessitates code generation. \
         #        useful for when you need to answer questions about programs, scripts, code or algorithms."
         #),
+
         Tool(
-            name="Image link from image label",
-            func=image_retrieval_pipeline,
+            name="Images links from images labels",
+            func=multiple_query_image_retrieval,
             description="Useful when someone asks for advice on how to accomplish a specific task in data analytics software like Power BI Desktop or Tableau, you can enhance your responses by adding links to images."
         ),
         Tool(
@@ -74,7 +76,7 @@ def setup_agent(chatbot_name, memory, callbacks):
 
     # Set up the prompt template using the base.txt file and the tools list
     prompt = CustomPromptTemplate(
-        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base.txt")).replace(
+        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "baseMarcel.txt")).replace(
             "{chatbot_name}", chatbot_name),
         tools=tools,
         input_variables=["input", "intermediate_steps", "chat_history"]

@@ -318,7 +318,7 @@ Here is a recent picture of him: <img src="https://media.licdn.com/dms/image/C4E
 - IMOROU KARIMOU Rouchdane Sessi: Financial Engineering student at ESIGELEC, he likes playing video games.
 Here is a recent picture of him: <img src="https://media.licdn.com/dms/image/C4E03AQF6M1EgiBSuRA/profile-displayphoto-shrink_800_800/0/1649841487424?e=2147483647&v=beta&t=-7MJC1J570rvNSkAZ9xciZuyVbXwmgpxs0r-7tapq3Y">
 
-- AKPOVO Vignon Jefferson: Financial Engineering student at ESIGELEC, he likes playing piano .
+- AKPOVO Vignon Jefferson: student in Big Data at ESIGELEC, he likes playing piano .
 Here is a recent picture of him: <img src="https://media.licdn.com/dms/image/D4E03AQHJbhqoUmP8XQ/profile-displayphoto-shrink_400_400/0/1702291338449?e=2147483647&v=beta&t=eM1JNwdDi1upN6izkPhecVi-MxIpZiHEDiQlXEjaNLs">
 
 """

@@ -37,6 +37,7 @@ Thought: To provide a step-by-step guide on how to create a heatmap in Power BI,
 Action: Images links from images labels
 Action Input: Image of the 'get data' button in Power BI;Image of the 'heatmap' visualization in Power BI;Image of the 'save' button in Power BI;Image of the 'publish' button in Power BI
 Observation:['https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png', 'https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg', 'https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png', 'https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png']
+Thought: Now that I have the link of relevant images showing where to click in Power BI, I should insert each of them at the right place in my final answer.
 > Finished chain.
 
 **Step 1: Import Data**
@@ -202,7 +203,7 @@ Here is a recent picture of him:  <img src="https://th.bing.com/th/id/OIP.pSWB5r
 """
 
 ---------> As a one last thing,
-A user might thank you or greet you by saying for example: "Awesome" OR "Thank you" OR "Nice" OR something similar. In those case, always refer to the history
+A user might thank you or greet you by saying for example: "Hello" OR "Awesome" OR "Thank you" OR "Nice" OR something similar. In those case, always refer to the history
 of our discussion with him to recall the context and answer accordingly.
 
 

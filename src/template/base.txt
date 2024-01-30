@@ -199,6 +199,9 @@ Elisée Tegue is one of my creators and a student in Big Data at ESIGELEC. He ai
 Here is a recent picture of him:  <img src="https://th.bing.com/th/id/OIP.pSWB5rOcG5c5Ch6JGtl5aAAAAA?rs=1&pid=ImgDetMain">
 """
 
+---------> As a one last thing,
+A user might thank you or greet you by saying for example: "Awesome" OR "Thank you" OR "Nice" OR something similar. In those case, always refer to the history
+of our discussion with him to recall the context and answer accordingly.
 
 Now, it's your turn to play...so begin!
 

@@ -73,7 +73,7 @@ def setup_agent(chatbot_name, memory, callbacks):
 
     # Set up the prompt template using the base.txt file and the tools list
     prompt = CustomPromptTemplate(
-        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base.txt")).replace(
+        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "baseTeg.txt")).replace(
             "{chatbot_name}", chatbot_name),
         tools=tools,
         input_variables=["input", "intermediate_steps", "chat_history"]
@@ -87,12 +87,13 @@ def setup_agent(chatbot_name, memory, callbacks):
                                 google_api_key=google_genai_api_key,
                                 temperature=0.1)
 
-    gpt3 = ChatOpenAI(model="gpt-3.5-turbo-16k-0613", 
-                    openai_api_key = openai_api_key  
+    gpt3 = ChatOpenAI(model="gpt-3.5-turbo-16k-0613",
+                    openai_api_key = openai_api_key
+                      , temperature=0
                     )
 
     # Set up the LLMChain using the ChatOpenAI object and prompt template
-    llm_chain = LLMChain(llm=gpt3, prompt=prompt)
+    llm_chain = LLMChain(llm=llm, prompt=prompt)
 
     # Extract tool names from the tools list
     tool_names = [tool.name for tool in tools]

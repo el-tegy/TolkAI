@@ -6,9 +6,11 @@ import os
 # Add the src directory to sys.path to allow for absolute imports
 root_dir = Path(__file__).resolve().parents[1]
 sys.path.append(str(root_dir))
+os.chdir(root_dir)
 from agent.agent import chat_with_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory
+from langchain.callbacks import StreamlitCallbackHandler
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 import streamlit as st
 from google.oauth2 import service_account
@@ -25,46 +27,46 @@ key_path = st.secrets["service_account"]
 # Authenticate using the key file
 credentials, project_id = google.auth.default()
 
-st.set_page_config(page_title="TolkAI")
-st.title('TolkAI')
+st.set_page_config(page_title="TalkAI", layout="wide", initial_sidebar_state="collapsed")
+
+st.title('TalkAI')
 
 
 
 # Set up memory
 msgs = StreamlitChatMessageHistory(key="langchain_messages")
+print(msgs)
 memory = ConversationBufferMemory(memory_key="chat_history", chat_memory=msgs)
 reset_history = st.sidebar.button("Reset chat history")
 if len(msgs.messages) == 0 or reset_history:
     msgs.clear()
-    msgs.add_ai_message("Hello my name is TolkAI. How can I help you?")
+    msgs.add_ai_message("Hello my name is TalkAI. How can I help you?")
     st.session_state["last_run"] = None
 
-view_messages = st.expander("View the message contents in session state")
-#"st.session_state:", st.session_state.messages
 
-#for msg in st.session_state.messages:
- #   st.chat_message(msg["role"]).write(msg["content"])
 for msg in msgs.messages:
-    #st.chat_message(msg.type).write(msg.content)
+
     st.chat_message(msg.type).markdown(msg.content, unsafe_allow_html=True)
 
+
+
+
+
+output_container = st.empty()
 if prompt := st.chat_input():
+
     st.chat_message("human").write(prompt)
-    # Note: new messages are saved to history automatically by Langchain during run
-    response = chat_with_agent(prompt, "TolkAI", memory)
-    #st.chat_message("ai").write(response)
+    placeholder = st.empty()
+    with placeholder.container():
+        with st.chat_message("assistant"):
+            st_callback = StreamlitCallbackHandler(st.container())
+            response = chat_with_agent(prompt, "TolkAI", memory, [st_callback])
+
+            st.container().empty()
+            st.markdown(response, unsafe_allow_html=True)
+
+        st.chat_message("assistant").empty()
+    placeholder.empty()
+
+
     st.chat_message("ai").markdown(response, unsafe_allow_html=True)
-
-    # Draw the messages at the end, so newly generated ones show up immediately
-with view_messages:
-        """
-        Memory initialized with:
-        ```python
-        msgs = StreamlitChatMessageHistory(key="langchain_messages")
-        memory = ConversationBufferMemory(chat_memory=msgs)
-        ```
-
-        Contents of `st.session_state.langchain_messages`:
-        """
-        view_messages.json(st.session_state.langchain_messages)
-

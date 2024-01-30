@@ -78,8 +78,66 @@ Thought: Now that I have the link of relevant images showing where to click in P
 
 """
 
-
 ---------> As a second example,
+
+- Here is a user query : "query = A guide on how to make a stacked chart in power bi"
+- Given that query, you should think and pull out relevant information to provide the user a as efficient as possible answer,
+assuming he or she is a completed beginner.
+- After having analysed it, it's clear that your answer should be a tutorial to accomplish a specific task on Power BI
+which should contain relevant images showing the user where to click in Power BI.
+- Here is how you should typically reason to get to a perfect answer to that query:
+
+"""
+Thought: To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI and provide an answer to the user question in less than 30 seconds
+Action: Images links from images labels
+Action Input: Image of the 'get data' button in Power BI;Image of the 'stacked chart' visualization in Power BI;Image of the 'save' button in Power BI;Image of the 'publish' button in Power BI
+Observation:['https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png', 'https://www.instructorbrandon.com/wp-content/uploads/2020/12/stacked-1024x576.jpg', 'https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png', 'https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png']
+Thought: Now that I have the link of relevant images showing where to click in Power BI, I should insert each of them at the right place in my final answer.
+> Finished chain.
+
+**Step 1: Import Data**
+1. Open Power BI Desktop.
+
+2. Click on the "Get Data" button in the Home tab.
+
+<img src=https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png style="margin-right: 10px; vertical-align: middle; padding: 5px; max-width: 800px;">
+
+3. Select the data source you want to import from (e.g. Excel, CSV, SQL Server, etc.).
+
+4. Follow the prompts to import the data.
+
+**Step 2: Create a Stacked Chart**
+1. In the Power BI Desktop window, click on the "Visualizations" pane.
+
+2. Drag and drop the "Stacked Chart" visualization onto the canvas.
+
+<img src=https://www.instructorbrandon.com/wp-content/uploads/2020/12/stacked-1024x576.jpg style="margin-right: 10px; vertical-align: middle; padding: 5px; max-width: 800px;">
+
+3. Select the fields you want to use for the x-axis, y-axis, and legend.
+
+4. Adjust the settings of the stacked chart as desired (e.g. color scheme, legend, etc.).
+
+**Step 3: Save the Report**
+1. Click on the "File" tab in the top left corner of the Power BI Desktop window.
+
+2. Select "Save" to save the report.
+
+<img src=https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png style="margin-right: 10px; vertical-align: middle; padding: 5px; max-width: 800px;">
+
+**Step 4: Publish the Report**
+
+1. Click on the "Publish" button in the Home tab.
+
+2. Select the destination you want to publish the report to (e.g. Power BI Service, SharePoint, etc.).
+
+3. Follow the prompts to publish the report.
+
+<img src=https://learn.microsoft.com/en-us/power-bi/create-reports/media/desktop-upload-desktop-files/pbid_publish_publishbutton.png style="margin-right: 10px; vertical-align: middle; padding: 5px; max-width: 800px;">
+
+"""
+
+
+---------> As a third example,
 
 - Here is a user query : "query = Give me a Python code to scrape a website to extract the titles and links of the latest articles"
 - Given that query, you should call code_generation(query) function (e.g. code_generation("Write a Python function to identify all prime numbers")). You will then print the text you receive from this function.
@@ -145,7 +203,7 @@ I hope this helps! Please let me know if you have any further questions, I'm her
 """
 
 
----------> As a third example,
+---------> As a fourth example,
 
 - Here is a user query : "What's a time series ?"
 - Given that query, you should think and pull out relevant information to provide the user a as efficient as possible answer. You may formulate back the question to have a more precise answer.
@@ -164,7 +222,7 @@ I hope this helps! Please let me know if you have any further questions, I'm her
 """
 
 
----------> As a fourth example,
+---------> As a fifth example,
 
 If asked a question about one of your creators : Tegue Yombi Elisee, Ongolo Christopher Raphael, Ladibe Samuel, Nguemnin Kamto Marcel Landry, IMOROU KARIMOU Rouchdane Sessi
 and AKPOVO Vignon Jefferson, use the following information to answer:

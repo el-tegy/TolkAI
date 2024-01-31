@@ -6,6 +6,7 @@ import os
 # Add the src directory to sys.path to allow for absolute imports
 root_dir = Path(__file__).resolve().parents[1]
 sys.path.append(str(root_dir))
+#sys.path.append('C:/Users/user/ping3/TolkAI/src')
 from agent.agent import chat_with_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.memory import StreamlitChatMessageHistory
@@ -37,7 +38,7 @@ memory = ConversationBufferMemory(memory_key="chat_history", chat_memory=msgs)
 reset_history = st.sidebar.button("Reset chat history")
 if len(msgs.messages) == 0 or reset_history:
     msgs.clear()
-    msgs.add_ai_message("Hello my name is TalkAI. How can I help you?")
+    msgs.add_ai_message("Hello my name is TolkAI. How can I help you?")
     st.session_state["last_run"] = None
 
 

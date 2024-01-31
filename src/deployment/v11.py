@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 import os
 # Add the src directory to sys.path to allow for absolute imports
+# Add the src directory to sys.path to allow for absolute imports
 root_dir = Path(__file__).resolve().parents[1]
 sys.path.append(str(root_dir))
 from agent.agent import chat_with_agent

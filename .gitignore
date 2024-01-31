@@ -19,4 +19,4 @@ __pycache__/
 
 # ignore idea files
 .idea/
-src/.streamlit/secrets.toml
+src/deployment/.streamlit/secrets.toml

@@ -10,11 +10,11 @@ os.chdir(root_dir)
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 from langchain_community.utilities.google_search import GoogleSearchAPIWrapper
 from langchain.chains import LLMChain
-import sys
-sys.path.append('C:/Users/user/ping3/TolkAI/src')
+#import sys
+#sys.path.append('C:/Users/user/ping3/TolkAI/src')
 from template.template import CustomPromptTemplate, read_template
 from parse.parser import CustomOutputParser
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAI
 from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path
@@ -22,7 +22,7 @@ from utils.config import load_config
 from agent.image_retrieval import image_retrieval_pipeline
 from agent.image_retrieval import multiple_query_image_retrieval
 from agent.codey import code_generation
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI,OpenAI
 import google.generativeai as genai
 import streamlit as st
 from langchain.callbacks.manager import (
@@ -53,11 +53,11 @@ def setup_agent(chatbot_name, memory, callbacks):
     )
     # Instantiate a datetime object for datetime functionality
     tools = [
-        #Tool(
-         #   name="Search",
-          #  func=search.run,
-           #description="Useful when you want to respond to user requests that are related to current events,actuallity, real-time information"
-        #),
+        Tool(
+        name="Search",
+           func=search.run,
+           description="Useful when you want to respond to user requests that are related to current events,actuallity, real-time information  or if we don't know the answer"
+        ),
         Tool(
             name="Images links from images labels",
            func=image_retrieval_pipeline,
@@ -76,7 +76,7 @@ def setup_agent(chatbot_name, memory, callbacks):
 
     # Set up the prompt template using the base.txt file and the tools list
     prompt = CustomPromptTemplate(
-        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base_.txt")).replace(
+        template=read_template(str(Path(__file__).resolve().parent.parent / "template" / "base.txt")).replace(
             "{chatbot_name}", chatbot_name),
         tools=tools,
         input_variables=["input", "intermediate_steps", "chat_history"]
@@ -88,13 +88,13 @@ def setup_agent(chatbot_name, memory, callbacks):
     # Instantiate a ChatOpenAI object for language model interaction
     llm = ChatGoogleGenerativeAI(model="gemini-pro",
                                 google_api_key=google_genai_api_key,
-                                temperature=0.1)
+                                temperature=0.1) 
 
-    gpt3 = ChatOpenAI(model="gpt-3.5-turbo-16k-0613", 
-                    openai_api_key = openai_api_key  
+    gpt4 = ChatOpenAI(model="gpt-4-0125-preview", 
+                    openai_api_key = openai_api_key,streaming=True
                     )
     # Set up the LLMChain using the ChatOpenAI object and prompt template
-    llm_chain = LLMChain(llm=llm, prompt=prompt)
+    llm_chain = LLMChain(llm=gpt4, prompt=prompt)
 
     # Extract tool names from the tools list
     tool_names = [tool.name for tool in tools]

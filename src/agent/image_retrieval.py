@@ -96,18 +96,32 @@ def generate(formatted_prompt):
 
 
 dictionnaire = {
-    "Image of the /'get data/' button in power bi": "https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png",
-    "Image of the /'save/' button in power bi": "https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png",
-    "Image of the /'publish/' button in power bi": "https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png",
-    "duplicate column option in Power Query": "https://www.myexcelonline.com/wp-content/uploads/2017/10/Duplicate-Columns-03.png",
-    "filter button in Power Query": "https://excelunlocked.com/wp-content/uploads/2020/10/Text-Filters-in-Power-Query-Editor.png",
-    "Pie chart in Power BI": "https://cdn.educba.com/academy/wp-content/uploads/2020/02/Power-BI-Pie.png",
-    "Image of the 'Insert' tab in Word":"https://learn.microsoft.com/en-us/previous-versions/aspnet/images/dd465337.ocp_publish_web_settings_tab_with_cf_and_non_cf_databases(vs.110).png",
-    "Image of the 'Pictures' button in the 'Insert' tab":"https://www.wikihow.com/images/thumb/a/ac/Set-Tabs-in-a-Word-Document-Step-2-Version-2.jpg/v4-460px-Set-Tabs-in-a-Word-Document-Step-2-Version-2.jpg.webp",
-    "Image of the 'Insert Picture' dialog box":"https://www.automateexcel.com/excel/wp-content/uploads/2021/10/insert-function-dialog-box-4.png",
-    "Image of the 'Save' button in the 'File' tab":"https://www.learningcomputer.com/images/word_insert_tab.jpg",
-    "Image of the 'Publish' button in the 'File' tab":"https://teststeststests.com/wp-content/uploads/2021/08/4-GS-the-file-tab.gif",
-    #"Image of the /'get data/' button in Power BI": "https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png"
+    "Image of the 'get data' button in Power BI": "https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png",
+    "Image of the'save' button in Power BI": "https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png",
+    "Image of the'publish' button in Power BI": "https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png",
+    "Image of the duplicate column button in Power Query": "https://www.myexcelonline.com/wp-content/uploads/2017/10/Duplicate-Columns-03.png",
+    "Image of the'filter' button in Power Query": "https://excelunlocked.com/wp-content/uploads/2020/10/Text-Filters-in-Power-Query-Editor.png",
+    "Image of the'Pie chart' in Power BI": "https://cdn.educba.com/academy/wp-content/uploads/2020/02/Power-BI-Pie.png",
+    "Image of the'Insert' tab in Word":"https://learn.microsoft.com/en-us/previous-versions/aspnet/images/dd465337.ocp_publish_web_settings_tab_with_cf_and_non_cf_databases(vs.110).png",
+    "Image of the'Pictures' button in the 'Insert' tab":"https://www.wikihow.com/images/thumb/a/ac/Set-Tabs-in-a-Word-Document-Step-2-Version-2.jpg/v4-460px-Set-Tabs-in-a-Word-Document-Step-2-Version-2.jpg.webp",
+    "Image of the'Insert Picture' dialog box":"https://www.automateexcel.com/excel/wp-content/uploads/2021/10/insert-function-dialog-box-4.png",
+    "Image of the'Save' button in the 'File' tab":"https://www.learningcomputer.com/images/word_insert_tab.jpg",
+    "Image of the'Publish' button in the 'File' tab":"https://teststeststests.com/wp-content/uploads/2021/08/4-GS-the-file-tab.gif",
+    "Image of the fields pane in Power BI":"https://k21academy.com/wp-content/uploads/2021/07/Screenshot-61.png",
+    "Image of the slicer in Power BI":"https://cdn.educba.com/academy/wp-content/uploads/2020/03/Slicers-In-Power-BI.png",
+    "Image of the'merge tables' button in Power Query":"https://community.powerbi.com/t5/image/serverpage/image-id/238402iC4CB2E6CF5B2DC65/image-size/large?v=1.0&px=999",
+    "Image of the undo button in Power Query in Power BI":"https://cdn-5a6cb102f911c811e474f1cd.closte.com/wp-content/uploads/2018/02/Main-Areas-of-the-Power-Query-Editor.png",
+    "Image of the 'New Measure' button in Power BI":"https://learn.microsoft.com/en-us/power-bi/transform-model/media/desktop-tutorial-create-measures/meastut_netsales_newmeasure.png",
+    "Image of the'Measure' field in Power BI":"https://learn.microsoft.com/en-us/power-bi/transform-model/media/desktop-measures/measuresinpbid_measinfieldlist.png",
+    "Image of the'change type' option in Power Query":"https://learn.microsoft.com/en-us/power-query/media/data-types/right-click.png",
+    "Image of the slicer in the visualizations pane in Power BI":"https://www.enjoysharepoint.com/wp-content/uploads/2021/07/Power-BI-Slicer-4-1536x623.png",
+    "Image of the 'Data Type' drop-down list in Power Query":"https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-data-types/pbiddatatypesinqueryeditort.png",
+    "Image of the 'Data' view in Power BI":"https://miro.medium.com/max/3840/1*ysFfkvTMXiD5dyZcKuBg-Q.png",
+    "Image of the 'Formula Bar' in Power BI":"https://i0.wp.com/blog.enterprisedna.co/wp-content/uploads/2020/08/1-21.png",
+    "Image of the 'Merge Queries' button in Power BI":"https://www.acuitytraining.co.uk/wp-content/uploads/2021/12/Power-BI-Merge-Queries-and-Append-Queries-4-650x247.png",
+    "Image of the 'Join kind' options in Power BI":"https://pbitraining.bizdata.com.au/dataprep/lab_1_transforming_data/use_power_query_editor/merging/MergeWizard2.jpg",
+    "Image of the 'Query Editor' in Power BI":"https://absentdata.com/wp-content/uploads/2019/07/query-editor.png",
+    "Image of the 'Merge Editor' window in Power BI":"https://www.acuitytraining.co.uk/wp-content/uploads/2021/12/Power-BI-Merge-Queries-and-Append-Queries-4-650x247.png"
 }
 
 def trouver_correspondance(query, dictionnaire):
@@ -125,23 +139,27 @@ def trouver_correspondance(query, dictionnaire):
         return None
 
 
-def image_retrieval_pipeline(query):
+def image_retrieval_pipeline(query_list):
     url = "https://www.googleapis.com/customsearch/v1"
-    total_images = 20  # Total number of images to download
+    total_images = 30  # Total number of images to download
     images_per_request = 5  # Maximum number of images per request
-    most_relevant_image = trouver_correspondance(query, dictionnaire)
-    if most_relevant_image is not None:
-        print("most rel " +query)
-        return most_relevant_image
-    else:
-        print("search "+query)
-        query = query.replace("button", "")
-        image_urls = image_search(query=query, total_images=total_images, images_per_request=images_per_request,
-                                  url=url)
-        formatted_prompt = format_for_generate(image_urls, query)
-        response = generate(formatted_prompt)
-        most_relevant_image = response[2:-2].replace(" ", "")
-        return most_relevant_image
+    query_list = query_list.split(";")
+    list_relevant_image=[]
+    for query in query_list:
+        most_relevant_image = trouver_correspondance(query, dictionnaire)
+        if most_relevant_image is not None:
+            print("most rel " +query)
+            list_relevant_image.append(most_relevant_image)
+        else:
+            print("search "+query)
+            query = query.replace("button", "")
+            image_urls = image_search(query=query, total_images=total_images, images_per_request=images_per_request,
+                                    url=url)
+            formatted_prompt = format_for_generate(image_urls, query)
+            response = generate(formatted_prompt)
+            most_relevant_image = response[2:-2].replace(" ", "")
+            list_relevant_image.append(most_relevant_image)
+    return list_relevant_image
 
 # Assuming list_url is a global set
 def multiple_query_image_retrieval(query):
@@ -152,7 +170,7 @@ def multiple_query_image_retrieval(query):
 
 def multiple_query_image_retrieval2(query):
     # Split the query string
-    queries = query.split(";")
+    queries = query.split(",")
 
     # Use concurrent.futures.ThreadPoolExecutor for parallelization
     with concurrent.futures.ThreadPoolExecutor() as executor:

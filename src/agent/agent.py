@@ -61,7 +61,7 @@ def setup_agent(chatbot_name, memory, callbacks):
         Tool(
             name="Images links from images labels",
             func=multiple_query_image_retrieval,
-            description="Useful when someone asks for advice on how to accomplish a specific task in data analytics software like Power BI Desktop or Tableau, you can enhance your responses by adding links to images."
+            description="Beneficial when seeking guidance on executing specific tasks in data analytics tools such as Power BI Desktop or Tableau. Additionally, valuable for incorporating images into responses."
         ),
         Tool(
             name="code from query",
@@ -88,7 +88,9 @@ def setup_agent(chatbot_name, memory, callbacks):
                                 temperature=0.1)
 
     gpt = ChatOpenAI(model="gpt-3.5-turbo-1106", 
-                    openai_api_key = openai_api_key  
+                    openai_api_key = openai_api_key,
+                    streaming = True,
+                    temperature=0.1
                     )
 
     # Set up the LLMChain using the ChatOpenAI object and prompt template

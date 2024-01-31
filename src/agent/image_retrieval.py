@@ -12,7 +12,7 @@ import difflib
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["service_account"])
 
-PROJECT_ID = 'ping38'
+PROJECT_ID = 'just-lore-408910'
 params = {
     "cx": "b3cc7e87732c140e9",
     "key": "AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
@@ -21,7 +21,7 @@ params = {
 }
 
 vertexai.init(
-    project='ping38',
+    project='just-lore-408910',
     credentials=credentials
 )
 

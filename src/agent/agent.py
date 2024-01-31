@@ -90,7 +90,7 @@ def setup_agent(chatbot_name, memory, callbacks):
                                 google_api_key=google_genai_api_key,
                                 temperature=0.1) 
 
-    gpt4 = ChatOpenAI(model="gpt-4-0125-preview", 
+    gpt4 = ChatOpenAI(model="gpt-4-0613", 
                     openai_api_key = openai_api_key,streaming=True
                     )
     
@@ -98,7 +98,7 @@ def setup_agent(chatbot_name, memory, callbacks):
                     openai_api_key = openai_api_key,streaming=True
                     )
     # Set up the LLMChain using the ChatOpenAI object and prompt template
-    llm_chain = LLMChain(llm=gpt, prompt=prompt)
+    llm_chain = LLMChain(llm=gpt4, prompt=prompt)
 
     # Extract tool names from the tools list
     tool_names = [tool.name for tool in tools]

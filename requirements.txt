@@ -1,4 +1,11 @@
-streamlit
 langchain
+langchain_community==0.0.4
 google-cloud-aiplatform
-scikit-learn
+langchain_openai
+langchain-google-genai
+python-dotenv==1.0.0
+google-api-python-client==2.100.0
+google_search_results==2.4.2
+google-auth 
+google-api-python-client
+pytest==7.3.1

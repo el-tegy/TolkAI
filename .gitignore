@@ -1,7 +1,22 @@
-# Credentials
+# Ignore credentials
 credentials.json
+Credentials.json
+
+
+# ignore virtual environments
+venv
+env
+myenv
+key.env
 .env
 
-# Virtual environment
-venv/
-env/
+# ignore python cache
+__pycache__/
+*.py[cod]
+
+# ignore cpython files
+*.pyc
+
+# ignore idea files
+.idea/
+src/.streamlit/secrets.toml

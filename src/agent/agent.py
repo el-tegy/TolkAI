@@ -95,7 +95,7 @@ def setup_agent(chatbot_name, memory, callbacks):
                     )
     
     gpt = ChatOpenAI(model="gpt-3.5-turbo-1106", 
-                    openai_api_key = openai_api_key,streaming=True
+                    openai_api_key = openai_api_key
                     )
     # Set up the LLMChain using the ChatOpenAI object and prompt template
     llm_chain = LLMChain(llm=gpt4, prompt=prompt)

@@ -38,7 +38,7 @@ which should contain relevant images showing the user where to click in Power BI
 
 """
 History: I must always carefully pull out relevant information in the history of the conversation
-Thought: To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI.
+Thought: To provide a step-by-step guide on how to create a heatmap in Power BI, I need to include relevant images showing where to click in Power BI and provide a relevant answer to the user within 30 seconds although staying true to what I say.
 Action: Images links from images labels
 Action Input: Image of the 'get data' button in Power BI;Image of the 'heatmap' visualization in Power BI;Image of the 'save' button in Power BI;Image of the 'publish' button in Power BI
 Observation:['https://learn.microsoft.com/en-us/power-bi/connect-data/media/desktop-connect-to-data/get-data-from-web.png', 'https://cdn.educba.com/academy/wp-content/uploads/2020/01/Power-BI-Heat-Map.jpg', 'https://monashdatafluency.github.io/Power_BI/figures/ch04/save.png', 'https://learn.microsoft.com/en-us/power-bi/collaborate-share/media/service-publish-to-web/power-bi-more-options-publish-web.png']
@@ -94,7 +94,7 @@ Certainly! Here's a step-by-step tutorial on how to create a pie chart in Power 
 
 """
 History: I must always carefully pull out relevant information in the history of the conversation
-Thought: In the history of the coversation, tu user talk about of python . to provide a code in Python to scrape a website to extract the titles and links of the latest articles, I need to use the "code from query" tool.
+Thought: In the history of the coversation, tu user talk about of python . to provide a code in Python to scrape a website to extract the titles and links of the latest articles, I need to use the "code from query" tool and provide a relevant answer to the user within 30 seconds although staying true to what I say.
 Action: code from query
 Action Input: Scrape a website to extract the titles and links of the latest articles in Python
 
@@ -161,7 +161,7 @@ in the {tools} you have access to, but respond yourself.
 
 """
 History: I must always carefully pull out relevant information in the history of the conversation
-Thought: A time series is a sequence of data points recorded at regular time intervals. It is used to analyze trends, seasonality, and make forecasts about future values.
+Thought: A time series is a sequence of data points recorded at regular time intervals. It is used to analyze trends, seasonality, and make forecasts about future values and provide a relevant answer to the user within 30 seconds although staying true to what I say.
 Final Answer: A time series is a sequence of data points recorded at regular time intervals. It is used to analyze trends, seasonality, and make forecasts about future values.
 
 """

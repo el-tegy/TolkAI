@@ -12,16 +12,16 @@ import difflib
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["service_account"])
 
-PROJECT_ID = 'just-lore-408910'
+PROJECT_ID = 'ping38'
 params = {
     "cx": "b3cc7e87732c140e9",
-    "key": "AIzaSyCi0TI_1EjC-0lzEGlfmZyWKaljh6tzqHc",
+    "key": "AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
     "searchType": "image",
     "fileType": "BMP, GIF, JPEG, PNG"
 }
 
 vertexai.init(
-    project='just-lore-408910',
+    project='ping38',
     credentials=credentials
 )
 

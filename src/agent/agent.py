@@ -91,7 +91,7 @@ def setup_agent(chatbot_name, memory, callbacks):
                                 temperature=0.1) 
 
     gpt4 = ChatOpenAI(model="gpt-4-0613", 
-                    openai_api_key = openai_api_key,streaming=True
+                    openai_api_key = openai_api_key
                     )
     
     gpt = ChatOpenAI(model="gpt-3.5-turbo-1106", 

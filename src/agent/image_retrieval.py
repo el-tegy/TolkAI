@@ -15,7 +15,7 @@ credentials = service_account.Credentials.from_service_account_info(
 PROJECT_ID = 'just-lore-408910'
 params = {
     "cx": "b3cc7e87732c140e9",
-    "key": "AIzaSyANitOObhh9yTC7Sd6GdiLQGcLJgI1Tz7E",
+    "key": "AIzaSyCi0TI_1EjC-0lzEGlfmZyWKaljh6tzqHc",
     "searchType": "image",
     "fileType": "BMP, GIF, JPEG, PNG"
 }

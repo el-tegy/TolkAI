@@ -10,7 +10,7 @@ os.chdir(root_dir)
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 from langchain_community.utilities.google_search import GoogleSearchAPIWrapper
 from langchain.chains import LLMChain
-#import sys
+import sys
 #sys.path.append('C:/Users/user/ping3/TolkAI/src')
 from template.template import CustomPromptTemplate, read_template
 from parse.parser import CustomOutputParser
@@ -93,8 +93,12 @@ def setup_agent(chatbot_name, memory, callbacks):
     gpt4 = ChatOpenAI(model="gpt-4-0125-preview", 
                     openai_api_key = openai_api_key,streaming=True
                     )
+    
+    gpt = ChatOpenAI(model="gpt-3.5-turbo-1106", 
+                    openai_api_key = openai_api_key,streaming=True
+                    )
     # Set up the LLMChain using the ChatOpenAI object and prompt template
-    llm_chain = LLMChain(llm=gpt4, prompt=prompt)
+    llm_chain = LLMChain(llm=gpt, prompt=prompt)
 
     # Extract tool names from the tools list
     tool_names = [tool.name for tool in tools]

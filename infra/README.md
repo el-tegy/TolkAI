@@ -1,4 +1,4 @@
-# Infrascture GCP Deployment
+# Infrastructure GCP Deployment
 
 This repository contains Terraform configurations and Ansible playbooks to deploy infrastructure resources on Google Cloud Platform (GCP).
 
